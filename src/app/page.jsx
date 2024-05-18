@@ -18,7 +18,7 @@ export default function Home() {
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti, facere laudantium perspiciatis quia rerum!
               </p>
               <a href="#"
-                 className="text-base font-semibold bg-primary py-3 px-8 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out">
+                 className="text-base font-semibold bg-primary py-3 px-8 text-slate-600 rounded-full hover:shadow-lg hover:opacity-80 transition duration-300 ease-in-out">
                 Contact Me
               </a>
             </div>
