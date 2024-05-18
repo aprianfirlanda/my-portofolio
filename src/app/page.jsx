@@ -43,17 +43,17 @@ export default function Home() {
       <section id="about" className="pt-36 pb-32">
         <div className="container">
           <div className="flex flex-wrap">
-            <div className="w-full px-4 mb-10">
-              <h4 className="font-bold uppercase text-primary text-lg mb-5">Tentang Saya</h4>
-              <h2 className="font-bold text-3xl mb-5 max-w-md">Yuk belajar web programming di wpu!</h2>
-              <p className="font-medium text-base text-secondary">
+            <div className="w-full px-4 mb-10 lg:w-1/2">
+              <h4 className="font-bold uppercase text-primary text-lg mb-3">Tentang Saya</h4>
+              <h2 className="font-bold text-3xl mb-5 max-w-md lg:text-4xl">Yuk belajar web programming di wpu!</h2>
+              <p className="font-medium text-base text-secondary lg:text-lg">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci beatae excepturi expedita id omnis
                 suscipit!
               </p>
             </div>
-            <div className="w-full px-4">
-              <h3 className="font-semibold text-dark text-2xl mb-4">Mari berteman</h3>
-              <p className="font-medium text-base text-secondary mb-6">
+            <div className="w-full px-4 lg:w-1/2">
+              <h3 className="font-semibold text-dark text-2xl mb-4 lg:text-3xl lg:pt-10">Mari berteman</h3>
+              <p className="font-medium text-base text-secondary mb-6 lg:text-lg">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci beatae excepturi expedita id omnis
                 suscipit!
               </p>
