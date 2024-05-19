@@ -47,25 +47,30 @@ export default function Home() {
                 <span className="hamburger-line"></span>
                 <span className="hamburger-line origin-bottom-left"></span>
               </button>
-              <nav id="nav-menu" className="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
+              <nav id="nav-menu"
+                   className="hidden absolute py-5 bg-white shadow-lg rounded-lg max-w-[250px] w-full right-4 top-full lg:block lg:static lg:bg-transparent lg:max-w-full lg:shadow-none lg:rounded-none">
                 <ul className="block lg:flex">
                   <li className="group">
                     <a href="#home" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Beranda</a>
                   </li>
                   <li className="group">
-                    <a href="#about" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Tentang Saya</a>
+                    <a href="#about" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Tentang
+                      Saya</a>
                   </li>
                   <li className="group">
-                    <a href="#portfolio" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Portfolio</a>
+                    <a href="#portfolio"
+                       className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Portfolio</a>
                   </li>
                   <li className="group">
-                    <a href="#clients" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Clients</a>
+                    <a href="#clients"
+                       className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Clients</a>
                   </li>
                   <li className="group">
                     <a href="#blog" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Blog</a>
                   </li>
                   <li className="group">
-                    <a href="#contact" className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Contact</a>
+                    <a href="#contact"
+                       className="text-base text-dark py-2 mx-8 flex group-hover:text-primary">Contact</a>
                   </li>
                 </ul>
               </nav>
@@ -73,7 +78,7 @@ export default function Home() {
           </div>
         </div>
       </header>
-      <section id="home" className="pt-36">
+      <section id="home" className="pt-36 bg-white">
         <div className="container">
           <div className="flex flex-wrap">
             <div className="w-full self-center px-4 lg:w-1/2">
@@ -110,7 +115,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id="about" className="pt-36 pb-32">
+      <section id="about" className="pt-36 pb-32 bg-white">
         <div className="container">
           <div className="flex flex-wrap">
             <div className="w-full px-4 mb-10 lg:w-1/2">
@@ -157,6 +162,50 @@ export default function Home() {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      <section id="portfolio" className="pt-36 pb-16 bg-slate-100">
+        <div className="container">
+          <div className="w-full px-4">
+            <div className="max-w-xl mx-auto text-center mb-16">
+              <h4 className="font-semibold text-lg text-primary mb-2">Portfolio</h4>
+              <h2 className="font-bold text-dark text-3xl mb-4">Project Terbaru</h2>
+              <p className="font-medium text-md text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Accusantium cum doloribus earum eius, molestiae molestias nemo obcaecati sunt voluptate
+                voluptates!</p>
+            </div>
+          </div>
+          <div className="w-full px-4 flex flex-wrap justify-center xl:w-10/12 xl:mx-auto">
+            <div className="mb-12 p-4 md:w-1/2">
+              <div className="rounded-md shadow-md overflow-hidden">
+                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317" className="w-full"/>
+              </div>
+              <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+            </div>
+            <div className="mb-12 p-4 md:w-1/2">
+              <div className="rounded-md shadow-md overflow-hidden">
+                <Image src="https://source.unsplash.com/random/600x317?sig=2" alt="project1" width="600" height="317" className="w-full"/>
+              </div>
+              <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+            </div>
+            <div className="mb-12 p-4 md:w-1/2">
+              <div className="rounded-md shadow-md overflow-hidden">
+                <Image src="https://source.unsplash.com/random/600x317?sig=3" alt="project1" width="600" height="317" className="w-full"/>
+              </div>
+              <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+            </div>
+            <div className="mb-12 p-4 md:w-1/2">
+              <div className="rounded-md shadow-md overflow-hidden">
+                <Image src="https://source.unsplash.com/random/600x317?sig=4" alt="project1" width="600" height="317" className="w-full"/>
+              </div>
+              <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+            </div>
+
           </div>
         </div>
       </section>
