@@ -2,9 +2,7 @@
 const nextConfig = {
   images: {
     domains: ['source.unsplash.com'],
-  },
-  output: 'export',
-  distDir: 'dist',
+  }
 };
 
 export default nextConfig;
