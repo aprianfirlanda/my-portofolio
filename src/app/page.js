@@ -38,7 +38,11 @@ export default function Home() {
         <div className="container">
           <div className="flex items-center justify-between relative">
             <div className="px-4">
-              <a href="#home" className="font-bold text-lg text-primary block py-6">Aprian Firlanda</a>
+              <a href="#home" className="font-bold text-lg text-transparent block py-6">
+                <span className="bg-gradient-to-r from-teal-400 to-blue-300 bg-clip-text">
+                  Aprian Firlanda
+                </span>
+              </a>
             </div>
             <div className="flex items-center px-4">
               <button id="hamburger" name="hamburger" type="button" className="block absolute right-4 lg:hidden"
@@ -171,7 +175,8 @@ export default function Home() {
             <div className="max-w-xl mx-auto text-center mb-16">
               <h4 className="font-semibold text-lg text-primary mb-2">Portfolio</h4>
               <h2 className="font-bold text-dark text-3xl mb-4 sm:text-4xl md:text-5xl">Project Terbaru</h2>
-              <p className="font-medium text-md text-secondary md:text-lg">Lorem ipsum dolor sit amet, consectetur adipisicing
+              <p className="font-medium text-md text-secondary md:text-lg">Lorem ipsum dolor sit amet, consectetur
+                adipisicing
                 elit. Accusantium cum doloribus earum eius, molestiae molestias nemo obcaecati sunt voluptate
                 voluptates!</p>
             </div>
@@ -179,31 +184,39 @@ export default function Home() {
           <div className="w-full px-4 flex flex-wrap justify-center xl:w-10/12 xl:mx-auto">
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317" className="w-full"/>
+                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317"
+                       className="w-full"/>
               </div>
               <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
-              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
             </div>
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317" className="w-full"/>
+                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317"
+                       className="w-full"/>
               </div>
               <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
-              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
             </div>
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317" className="w-full"/>
+                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317"
+                       className="w-full"/>
               </div>
               <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
-              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
             </div>
             <div className="mb-12 p-4 md:w-1/2">
               <div className="rounded-md shadow-md overflow-hidden">
-                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317" className="w-full"/>
+                <Image src="https://source.unsplash.com/random/600x317?sig=1" alt="project1" width="600" height="317"
+                       className="w-full"/>
               </div>
               <h3 className="font-semibold text-xl text-dark mt-5 mb-3 ">Landing Page Sandhika Galih</h3>
-              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
+              <p className="font-medium text-base text-secondary">Lorem ipsum dolor sit amet, consectetur adipisicing
+                elit. Atque, consequuntur debitis dolorem praesentium recusandae voluptates.</p>
             </div>
 
           </div>
@@ -222,17 +235,25 @@ export default function Home() {
           </div>
           <div className="w-full px-4">
             <div className="flex flex-wrap items-center justify-center">
-              <a href="#" className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600" height="700"/>
+              <a href="#"
+                 className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600"
+                       height="700"/>
               </a>
-              <a href="#" className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600" height="700"/>
+              <a href="#"
+                 className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600"
+                       height="700"/>
               </a>
-              <a href="#" className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600" height="700"/>
+              <a href="#"
+                 className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600"
+                       height="700"/>
               </a>
-              <a href="#" className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
-                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600" height="700"/>
+              <a href="#"
+                 className="max-w-[120px] mx-4 py-4 grayscale opacity-60 transition duration-500 hover:grayscale-0 hover:opacity-100 lg:mx-6 xl:mx-8">
+                <Image src="https://source.unsplash.com/random/1600x700?sig=1" alt="Client 1" width="1600"
+                       height="700"/>
               </a>
             </div>
           </div>
@@ -252,37 +273,52 @@ export default function Home() {
           <div className="flex flex-wrap">
             <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
-                <Image src="https://source.unsplash.com/random/360x200?programming" alt="Blog 1" width="360" height="200" className="w-full"/>
+                <Image src="https://source.unsplash.com/random/360x200?programming" alt="Blog 1" width="360"
+                       height="200" className="w-full"/>
                 <div className="py-8 px-6">
                   <h3>
-                    <a href="#" className="block mb-3 font-semibold text-xl text-dark hover:text-primary truncate">Tips Belajar Programming</a>
+                    <a href="#" className="block mb-3 font-semibold text-xl text-dark hover:text-primary truncate">Tips
+                      Belajar Programming</a>
                   </h3>
-                  <p className="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, quia?</p>
-                  <a href="#" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-xl hover:opacity-80">Baca Selengkapnya</a>
+                  <p className="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Itaque, quia?</p>
+                  <a href="#"
+                     className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-xl hover:opacity-80">Baca
+                    Selengkapnya</a>
                 </div>
               </div>
             </div>
             <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
-                <Image src="https://source.unsplash.com/random/360x200?programming" alt="Blog 1" width="360" height="200" className="w-full"/>
+                <Image src="https://source.unsplash.com/random/360x200?programming" alt="Blog 1" width="360"
+                       height="200" className="w-full"/>
                 <div className="py-8 px-6">
                   <h3>
-                    <a href="#" className="block mb-3 font-semibold text-xl text-dark hover:text-primary truncate">Tips Belajar Programming</a>
+                    <a href="#" className="block mb-3 font-semibold text-xl text-dark hover:text-primary truncate">Tips
+                      Belajar Programming</a>
                   </h3>
-                  <p className="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, quia?</p>
-                  <a href="#" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-xl hover:opacity-80">Baca Selengkapnya</a>
+                  <p className="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Itaque, quia?</p>
+                  <a href="#"
+                     className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-xl hover:opacity-80">Baca
+                    Selengkapnya</a>
                 </div>
               </div>
             </div>
             <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
               <div className="bg-white rounded-xl shadow-lg overflow-hidden mb-10">
-                <Image src="https://source.unsplash.com/random/360x200?programming" alt="Blog 1" width="360" height="200" className="w-full"/>
+                <Image src="https://source.unsplash.com/random/360x200?programming" alt="Blog 1" width="360"
+                       height="200" className="w-full"/>
                 <div className="py-8 px-6">
                   <h3>
-                    <a href="#" className="block mb-3 font-semibold text-xl text-dark hover:text-primary truncate">Tips Belajar Programming</a>
+                    <a href="#" className="block mb-3 font-semibold text-xl text-dark hover:text-primary truncate">Tips
+                      Belajar Programming</a>
                   </h3>
-                  <p className="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque, quia?</p>
-                  <a href="#" className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-xl hover:opacity-80">Baca Selengkapnya</a>
+                  <p className="font-medium text-base text-secondary mb-6">Lorem ipsum dolor sit amet, consectetur
+                    adipisicing elit. Itaque, quia?</p>
+                  <a href="#"
+                     className="font-medium text-sm text-white bg-primary py-2 px-4 rounded-xl hover:opacity-80">Baca
+                    Selengkapnya</a>
                 </div>
               </div>
             </div>
