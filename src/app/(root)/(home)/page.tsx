@@ -71,7 +71,7 @@ export default function Home() {
                   <li className='group'>
                     <a
                       href='#home'
-                      className='text-dark mx-8 flex py-2 text-base group-hover:text-primary'
+                      className='mx-8 flex py-2 text-base text-dark group-hover:text-primary'
                     >
                       Beranda
                     </a>
@@ -79,7 +79,7 @@ export default function Home() {
                   <li className='group'>
                     <a
                       href='#about'
-                      className='text-dark mx-8 flex py-2 text-base group-hover:text-primary'
+                      className='mx-8 flex py-2 text-base text-dark group-hover:text-primary'
                     >
                       Tentang Saya
                     </a>
@@ -87,7 +87,7 @@ export default function Home() {
                   <li className='group'>
                     <a
                       href='#portfolio'
-                      className='text-dark mx-8 flex py-2 text-base group-hover:text-primary'
+                      className='mx-8 flex py-2 text-base text-dark group-hover:text-primary'
                     >
                       Portfolio
                     </a>
@@ -95,7 +95,7 @@ export default function Home() {
                   <li className='group'>
                     <a
                       href='#clients'
-                      className='text-dark mx-8 flex py-2 text-base group-hover:text-primary'
+                      className='mx-8 flex py-2 text-base text-dark group-hover:text-primary'
                     >
                       Clients
                     </a>
@@ -103,7 +103,7 @@ export default function Home() {
                   <li className='group'>
                     <a
                       href='#blog'
-                      className='text-dark mx-8 flex py-2 text-base group-hover:text-primary'
+                      className='mx-8 flex py-2 text-base text-dark group-hover:text-primary'
                     >
                       Blog
                     </a>
@@ -111,7 +111,7 @@ export default function Home() {
                   <li className='group'>
                     <a
                       href='#contact'
-                      className='text-dark mx-8 flex py-2 text-base group-hover:text-primary'
+                      className='mx-8 flex py-2 text-base text-dark group-hover:text-primary'
                     >
                       Contact
                     </a>
@@ -128,7 +128,7 @@ export default function Home() {
             <div className='w-full self-center px-4 lg:w-1/2'>
               <h1 className='text-base font-semibold text-primary md:text-xl'>
                 Hi, I am
-                <span className='text-dark block text-4xl font-bold lg:text-5xl'>
+                <span className='block text-4xl font-bold text-dark lg:text-5xl'>
                   Aprian Firlanda Imani
                 </span>
               </h1>
@@ -190,7 +190,7 @@ export default function Home() {
               </p>
             </div>
             <div className='w-full px-4 lg:w-1/2'>
-              <h3 className='text-dark mb-4 text-2xl font-semibold lg:pt-10 lg:text-3xl'>
+              <h3 className='mb-4 text-2xl font-semibold text-dark lg:pt-10 lg:text-3xl'>
                 Mari berteman
               </h3>
               <p className='mb-6 text-base font-medium text-secondary lg:text-lg'>
@@ -258,10 +258,10 @@ export default function Home() {
               <h4 className='mb-2 text-lg font-semibold text-primary'>
                 Portfolio
               </h4>
-              <h2 className='text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-5xl'>
+              <h2 className='mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-5xl'>
                 Project Terbaru
               </h2>
-              <p className='text-md font-medium text-secondary md:text-lg'>
+              <p className='text-base font-medium text-secondary md:text-lg'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                 Accusantium cum doloribus earum eius, molestiae molestias nemo
                 obcaecati sunt voluptate voluptates!
@@ -279,7 +279,7 @@ export default function Home() {
                   className='w-full'
                 />
               </div>
-              <h3 className='text-dark mb-3 mt-5 text-xl font-semibold '>
+              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
                 Landing Page Sandhika Galih
               </h3>
               <p className='text-base font-medium text-secondary'>
@@ -297,7 +297,7 @@ export default function Home() {
                   className='w-full'
                 />
               </div>
-              <h3 className='text-dark mb-3 mt-5 text-xl font-semibold '>
+              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
                 Landing Page Sandhika Galih
               </h3>
               <p className='text-base font-medium text-secondary'>
@@ -315,7 +315,7 @@ export default function Home() {
                   className='w-full'
                 />
               </div>
-              <h3 className='text-dark mb-3 mt-5 text-xl font-semibold '>
+              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
                 Landing Page Sandhika Galih
               </h3>
               <p className='text-base font-medium text-secondary'>
@@ -333,7 +333,7 @@ export default function Home() {
                   className='w-full'
                 />
               </div>
-              <h3 className='text-dark mb-3 mt-5 text-xl font-semibold '>
+              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
                 Landing Page Sandhika Galih
               </h3>
               <p className='text-base font-medium text-secondary'>
@@ -354,7 +354,7 @@ export default function Home() {
               <h2 className='mb-4 text-3xl font-bold text-white sm:text-4xl md:text-5xl'>
                 Yang Pernah BerkerjaSama
               </h2>
-              <p className='text-md font-medium text-secondary md:text-lg'>
+              <p className='text-base font-medium text-secondary md:text-lg'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. At
                 ipsa rem velit?
               </p>
@@ -415,10 +415,10 @@ export default function Home() {
           <div className='w-full px-4'>
             <div className='mx-auto mb-16 max-w-xl text-center'>
               <h4 className='mb-2 text-lg font-semibold text-primary'>Blog</h4>
-              <h2 className='text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-5xl'>
+              <h2 className='mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-5xl'>
                 Tulisan Terbaru
               </h2>
-              <p className='text-md font-medium text-secondary md:text-lg'>
+              <p className='text-base font-medium text-secondary md:text-lg'>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
                 excepturi impedit laudantium sapiente.
               </p>
@@ -438,7 +438,7 @@ export default function Home() {
                   <h3>
                     <a
                       href='#'
-                      className='text-dark mb-3 block truncate text-xl font-semibold hover:text-primary'
+                      className='mb-3 block truncate text-xl font-semibold text-dark hover:text-primary'
                     >
                       Tips Belajar Programming
                     </a>
@@ -469,7 +469,7 @@ export default function Home() {
                   <h3>
                     <a
                       href='#'
-                      className='text-dark mb-3 block truncate text-xl font-semibold hover:text-primary'
+                      className='mb-3 block truncate text-xl font-semibold text-dark hover:text-primary'
                     >
                       Tips Belajar Programming
                     </a>
@@ -500,7 +500,7 @@ export default function Home() {
                   <h3>
                     <a
                       href='#'
-                      className='text-dark mb-3 block truncate text-xl font-semibold hover:text-primary'
+                      className='mb-3 block truncate text-xl font-semibold text-dark hover:text-primary'
                     >
                       Tips Belajar Programming
                     </a>
