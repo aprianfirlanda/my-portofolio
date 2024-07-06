@@ -21,11 +21,14 @@ export default function Home() {
                 Full Stack Web Developer
               </h2>
               <p className='mb-10 font-medium text-secondary'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Aperiam deleniti, facere laudantium perspiciatis quia rerum!
+                I have over 4 years of experience as a web developer, creating
+                robust and scalable web applications. Skilled in both front-end
+                and back-end development, I ensure seamless functionality.
+                Proficient in various languages and frameworks, I thrive in
+                collaborative environments.
               </p>
               <a
-                href='#'
+                href='https://api.whatsapp.com/send/?phone=%2B6282253600917&text&type=phone_number&app_absent=0'
                 className='rounded-full bg-primary px-8 py-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg'
               >
                 Contact Me
