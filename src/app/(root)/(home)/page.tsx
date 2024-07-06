@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Header from '@/components/Header'
 import { navItems } from '@/constants'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   return (
@@ -298,7 +299,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id='blog/pt-36' className='bg-slate-100 pb-32'>
+      <section id='blog' className='bg-slate-100 pb-32 pt-36'>
         <div className='container'>
           <div className='w-full px-4'>
             <div className='mx-auto mb-16 max-w-xl text-center'>
@@ -409,6 +410,72 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <section id='contact' className='pb-32 pt-36'>
+        <div className='container'>
+          <div className='w-full px-4'>
+            <div className='mx-auto mb-16 text-center'>
+              <h4 className='mb-2 text-lg font-semibold text-primary'>
+                Contact
+              </h4>
+              <h2 className='mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-5xl'>
+                Hubungi Kami
+              </h2>
+              <p className='text-base font-medium text-secondary md:text-lg'>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                Assumenda beatae commodi ratione.
+              </p>
+            </div>
+          </div>
+          <form>
+            <div className='w-full lg:mx-auto lg:w-2/3'>
+              <div className='mb-8 w-full px-4'>
+                <label
+                  htmlFor='name'
+                  className='text-base font-bold text-primary'
+                >
+                  Nama
+                </label>
+                <input
+                  type='text'
+                  id='name'
+                  className='w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary'
+                />
+              </div>
+              <div className='mb-8 w-full px-4'>
+                <label
+                  htmlFor='email'
+                  className='text-base font-bold text-primary'
+                >
+                  Email
+                </label>
+                <input
+                  type='email'
+                  id='email'
+                  className='w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary'
+                />
+              </div>
+              <div className='mb-8 w-full px-4'>
+                <label
+                  htmlFor='message'
+                  className='text-base font-bold text-primary'
+                >
+                  Pesan
+                </label>
+                <textarea
+                  id='message'
+                  className='h-32 w-full rounded-md bg-slate-200 p-3 text-dark focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary'
+                ></textarea>
+              </div>
+              <div className='w-full px-4'>
+                <button className='rounded-full bg-primary px-8 py-3 text-base font-semibold text-white transition duration-500 hover:opacity-80 hover:shadow-lg'>
+                  Kirim
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+      <Footer navItems={navItems} />
     </>
   )
 }
