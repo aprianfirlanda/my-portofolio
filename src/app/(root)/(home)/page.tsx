@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <Header navItems={navItems} />
 
-      <section id='home' className='pt-36'>
+      <section id='home' className='pt-24 lg:pt-36'>
         <div className='container'>
           <div className='flex flex-wrap'>
             <div className='w-full self-center px-4 lg:w-1/2'>
@@ -32,6 +32,13 @@ export default function Home() {
                 href='https://api.whatsapp.com/send/?phone=%2B6282253600917&text&type=phone_number&app_absent=0'
                 className='rounded-full bg-primary px-8 py-3 text-base font-semibold text-white transition duration-300 ease-in-out hover:opacity-80 hover:shadow-lg'
               >
+                <Image
+                  src='/icons/whatsapp.svg'
+                  alt='WhatsApp'
+                  className='inline-block invert'
+                  width={20}
+                  height={20}
+                />{' '}
                 Contact Me
               </a>
             </div>
@@ -40,24 +47,17 @@ export default function Home() {
                 <Image
                   width='499'
                   height='499'
-                  src='/profile-pic.png'
+                  src='/images/profile-pic.png'
                   alt='Profile Picture'
                   className='mx-auto max-w-full'
                 />
-                <span className='absolute bottom-0 left-1/2 -z-10 -translate-x-1/2 md:scale-125'>
-                  <svg
-                    width='400'
-                    height='400'
-                    viewBox='0 0 200 200'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path
-                      fill='#14b8a6'
-                      d='M49.9,-77.9C64.7,-68.2,76.7,-54.3,84.3,-38.3C91.9,-22.3,95.3,-4,91.9,12.6C88.5,29.2,78.5,44.3,66.7,57.5C54.8,70.8,41.2,82.2,25.1,88.3C9,94.3,-9.6,95,-26.5,90.1C-43.4,85.2,-58.7,74.7,-69.3,60.9C-79.9,47.2,-85.7,30.2,-88.1,12.8C-90.4,-4.6,-89.1,-22.4,-81.9,-37.1C-74.7,-51.9,-61.6,-63.6,-46.9,-73.3C-32.3,-83.1,-16.1,-90.8,0.7,-92C17.6,-93.1,35.1,-87.6,49.9,-77.9Z'
-                      transform='translate(100 100) scale(0.75)'
-                    />
-                  </svg>
-                </span>
+                <Image
+                  src='/images/profile-pic-background.svg'
+                  alt='WhatsApp'
+                  className='absolute bottom-0 left-1/2 -z-10 -translate-x-1/2'
+                  width={400}
+                  height={400}
+                />
               </div>
             </div>
           </div>
