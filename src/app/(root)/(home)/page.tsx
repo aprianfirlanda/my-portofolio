@@ -1,14 +1,12 @@
 import Image from 'next/image'
 import Header from '@/components/Header'
-import { navItems } from '@/constants'
+import { navItems, skillData, skillType } from '@/constants'
 import Footer from '@/components/Footer'
 import SidebarSocialMedia from '@/components/SidebarSocialMedia'
 
 // icons
 import WhatsAppIcon from '@/icons/whatsapp.svg'
-import GitHubIcon from '@/icons/github.svg'
-import LinkedInIcon from '@/icons/linkedin.svg'
-import InstagramIcon from '@/icons/instagram.svg'
+import CardSkill from '@/components/CardSkill'
 
 export default function Home() {
   return (
@@ -70,49 +68,29 @@ export default function Home() {
       <section id='skills' className='pb-32 pt-36'>
         <div className='container'>
           <div className='flex flex-wrap'>
-            <div className='mb-10 w-full px-4 lg:w-1/2'>
-              <h1 className='mb-3 text-lg font-bold uppercase text-primary'>
-                Skills
+            <div className='mb-10 w-full px-4'>
+              <h1 className='mb-3 text-center text-lg font-bold uppercase text-primary'>
+                Skill
               </h1>
-              <h2 className='mb-5 max-w-md text-3xl font-bold lg:text-4xl'>
-                Yuk belajar web programming di wpu!
+              <h2 className='mb-5 text-center text-3xl font-bold lg:text-4xl'>
+                Stack of Technologies
               </h2>
-              <p className='text-base font-medium text-secondary lg:text-lg'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Adipisci beatae excepturi expedita id omnis suscipit!
-              </p>
-            </div>
-            <div className='w-full px-4 lg:w-1/2'>
-              <h3 className='mb-4 text-2xl font-semibold text-dark lg:pt-10 lg:text-3xl'>
-                Mari berteman
-              </h3>
-              <p className='mb-6 text-base font-medium text-secondary lg:text-lg'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Adipisci beatae excepturi expedita id omnis suscipit!
-              </p>
-              <div className='flex items-center'>
-                <a
-                  href='https://github.com/aprianfirlanda'
-                  target='_blank'
-                  className='mr-3 flex size-9 items-center justify-center rounded-full border border-slate-300 text-secondary hover:border-primary hover:bg-primary hover:text-white'
-                >
-                  <GitHubIcon className='w-5 fill-current' />
-                </a>
-                <a
-                  href='https://www.linkedin.com/in/aprian-firlanda-imani-108852130/'
-                  target='_blank'
-                  className='mr-3 flex size-9 items-center justify-center rounded-full border border-slate-300 text-secondary hover:border-primary hover:bg-primary hover:text-white'
-                >
-                  <LinkedInIcon className='w-5 fill-current' />
-                </a>
-                <a
-                  href='https://www.instagram.com/virlandd/'
-                  target='_blank'
-                  className='mr-3 flex size-9 items-center justify-center rounded-full border border-slate-300 text-secondary hover:border-primary hover:bg-primary hover:text-white'
-                >
-                  <InstagramIcon className='w-5 fill-current' />
-                </a>
-              </div>
+              <ul>
+                {skillType.map(({ id, name }) => (
+                  <li key={id}>
+                    <h3 className='pb-5 pt-10 text-lg font-semibold'>{name}</h3>
+                    <div className='grid grid-cols-5 gap-2'>
+                      {skillData
+                        .filter(({ typeId }) => typeId === id)
+                        .map(({ imgSrc, title }) => (
+                          <div key={imgSrc} className='w-full'>
+                            <CardSkill imgSrc={imgSrc} title={title} />
+                          </div>
+                        ))}
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
