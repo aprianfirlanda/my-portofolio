@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Header from '@/components/Header'
 import { navItems } from '@/constants'
 import Footer from '@/components/Footer'
+import SidebarSocialMedia from '@/components/SidebarSocialMedia'
 
 // icons
 import WhatsAppIcon from '@/icons/whatsapp.svg'
@@ -12,6 +13,8 @@ import InstagramIcon from '@/icons/instagram.svg'
 export default function Home() {
   return (
     <>
+      <SidebarSocialMedia />
+
       <Header navItems={navItems} />
 
       <section id='home' className='pt-24 lg:pt-36'>
@@ -449,6 +452,7 @@ export default function Home() {
           </form>
         </div>
       </section>
+
       <Footer navItems={navItems} />
     </>
   )
