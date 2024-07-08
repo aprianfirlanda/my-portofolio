@@ -8,7 +8,7 @@ interface Props {
 
 function CardSkill({ imgSrc, title }: Props) {
   return (
-    <div className='flex flex-wrap items-center rounded-xl bg-white p-3 shadow-lg'>
+    <div className='flex flex-col items-center rounded-xl bg-white p-3 shadow-lg lg:flex-row'>
       <Image src={imgSrc} alt={title} width={50} height={50} />
       <h4 className='mx-3 text-lg font-bold'>{title}</h4>
     </div>

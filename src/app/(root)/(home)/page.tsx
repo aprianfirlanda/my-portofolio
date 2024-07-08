@@ -79,7 +79,7 @@ export default function Home() {
                 {skillType.map(({ id, name }) => (
                   <li key={id}>
                     <h3 className='pb-5 pt-10 text-lg font-semibold'>{name}</h3>
-                    <div className='grid grid-cols-5 gap-2'>
+                    <div className='lg: grid grid-cols-2 gap-2 lg:grid-cols-5'>
                       {skillData
                         .filter(({ typeId }) => typeId === id)
                         .map(({ imgSrc, title }) => (
