@@ -7,6 +7,7 @@ import SidebarSocialMedia from '@/components/SidebarSocialMedia'
 // icons
 import WhatsAppIcon from '@/icons/whatsapp.svg'
 import CardSkill from '@/components/CardSkill'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -15,7 +16,7 @@ export default function Home() {
 
       <Header navItems={navItems} />
 
-      <section id='home' className='pt-24 lg:pt-36'>
+      <section id='home' className='pt-24 lg:h-screen lg:pt-36'>
         <div className='container'>
           <div className='flex flex-wrap'>
             <div className='w-full self-center px-4 lg:w-1/2'>
@@ -65,7 +66,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id='skills' className='pb-32 pt-36'>
+      <section id='skills' className='bg-slate-100 pb-24 pt-14'>
         <div className='container'>
           <div className='flex flex-wrap'>
             <div className='mb-10 w-full px-4'>
@@ -93,7 +94,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section id='portfolio' className='bg-slate-100 pb-16 pt-36'>
+
+      <section id='portfolio' className='pb-24 pt-14'>
         <div className='container'>
           <div className='w-full px-4'>
             <div className='mx-auto mb-16 max-w-xl text-center'>
@@ -101,87 +103,30 @@ export default function Home() {
                 Portfolio
               </h4>
               <h2 className='mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-5xl'>
-                Project Terbaru
+                Projects as a Freelancer
               </h2>
-              <p className='text-base font-medium text-secondary md:text-lg'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Accusantium cum doloribus earum eius, molestiae molestias nemo
-                obcaecati sunt voluptate voluptates!
-              </p>
             </div>
           </div>
           <div className='flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-10/12'>
             <div className='mb-12 p-4 md:w-1/2'>
-              <div className='overflow-hidden rounded-md shadow-md'>
-                <Image
-                  src='https://source.unsplash.com/random/600x317?sig=1'
-                  alt='project1'
-                  width='600'
-                  height='317'
-                  className='w-full'
-                />
-              </div>
-              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
-                Landing Page Sandhika Galih
-              </h3>
-              <p className='text-base font-medium text-secondary'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque,
-                consequuntur debitis dolorem praesentium recusandae voluptates.
-              </p>
-            </div>
-            <div className='mb-12 p-4 md:w-1/2'>
-              <div className='overflow-hidden rounded-md shadow-md'>
-                <Image
-                  src='https://source.unsplash.com/random/600x317?sig=1'
-                  alt='project1'
-                  width='600'
-                  height='317'
-                  className='w-full'
-                />
-              </div>
-              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
-                Landing Page Sandhika Galih
-              </h3>
-              <p className='text-base font-medium text-secondary'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque,
-                consequuntur debitis dolorem praesentium recusandae voluptates.
-              </p>
-            </div>
-            <div className='mb-12 p-4 md:w-1/2'>
-              <div className='overflow-hidden rounded-md shadow-md'>
-                <Image
-                  src='https://source.unsplash.com/random/600x317?sig=1'
-                  alt='project1'
-                  width='600'
-                  height='317'
-                  className='w-full'
-                />
-              </div>
-              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
-                Landing Page Sandhika Galih
-              </h3>
-              <p className='text-base font-medium text-secondary'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque,
-                consequuntur debitis dolorem praesentium recusandae voluptates.
-              </p>
-            </div>
-            <div className='mb-12 p-4 md:w-1/2'>
-              <div className='overflow-hidden rounded-md shadow-md'>
-                <Image
-                  src='https://source.unsplash.com/random/600x317?sig=1'
-                  alt='project1'
-                  width='600'
-                  height='317'
-                  className='w-full'
-                />
-              </div>
-              <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
-                Landing Page Sandhika Galih
-              </h3>
-              <p className='text-base font-medium text-secondary'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque,
-                consequuntur debitis dolorem praesentium recusandae voluptates.
-              </p>
+              <Link href='https://www.kacasooca.com/'>
+                <div className='flex overflow-hidden rounded-md shadow-md'>
+                  <Image
+                    src='/images/projects/kacasooca.png'
+                    alt='project1'
+                    width={16 * 30}
+                    height={9 * 30}
+                    className='w-full'
+                  />
+                </div>
+                <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
+                  Kacasooca
+                </h3>
+                <p className='text-base font-medium text-secondary'>
+                  A catalog website for eyeglasses featuring frames and lenses
+                  originating from Garut, West Java, Indonesia.
+                </p>
+              </Link>
             </div>
           </div>
         </div>
