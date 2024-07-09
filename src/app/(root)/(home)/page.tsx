@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Header from '@/components/Header'
-import { navItems, skillData, skillType } from '@/constants'
+import { navItems, skills } from '@/constants'
 import Footer from '@/components/Footer'
 import SidebarSocialMedia from '@/components/SidebarSocialMedia'
 
@@ -70,23 +70,21 @@ export default function Home() {
           <div className='flex flex-wrap'>
             <div className='mb-10 w-full px-4'>
               <h1 className='mb-3 text-center text-lg font-bold uppercase text-primary'>
-                Skill
+                Skills
               </h1>
               <h2 className='mb-5 text-center text-3xl font-bold lg:text-4xl'>
                 Stack of Technologies
               </h2>
               <ul>
-                {skillType.map(({ id, name }) => (
+                {skills.map(({ id, name, data }) => (
                   <li key={id}>
                     <h3 className='pb-5 pt-10 text-lg font-semibold'>{name}</h3>
                     <div className='lg: grid grid-cols-2 gap-2 lg:grid-cols-5'>
-                      {skillData
-                        .filter(({ typeId }) => typeId === id)
-                        .map(({ imgSrc, title }) => (
-                          <div key={imgSrc} className='w-full'>
-                            <CardSkill imgSrc={imgSrc} title={title} />
-                          </div>
-                        ))}
+                      {data.map(({ imgSrc, title }) => (
+                        <div key={imgSrc} className='w-full'>
+                          <CardSkill imgSrc={imgSrc} title={title} />
+                        </div>
+                      ))}
                     </div>
                   </li>
                 ))}
