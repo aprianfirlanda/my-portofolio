@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Header from '@/components/Header'
-import { navItems, skills } from '@/constants'
+import { blogs, navItems, skills } from '@/constants'
 import Footer from '@/components/Footer'
 import SidebarSocialMedia from '@/components/SidebarSocialMedia'
 
@@ -8,6 +8,7 @@ import SidebarSocialMedia from '@/components/SidebarSocialMedia'
 import WhatsAppIcon from '@/icons/whatsapp.svg'
 import CardSkill from '@/components/CardSkill'
 import Link from 'next/link'
+import CardBlog from '@/components/CardBlog'
 
 export default function Home() {
   return (
@@ -138,108 +139,21 @@ export default function Home() {
             <div className='mx-auto mb-16 max-w-xl text-center'>
               <h4 className='mb-2 text-lg font-semibold text-primary'>Blog</h4>
               <h2 className='mb-4 text-3xl font-bold text-dark sm:text-4xl md:text-5xl'>
-                Tulisan Terbaru
+                Latest Post
               </h2>
               <p className='text-base font-medium text-secondary md:text-lg'>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-                excepturi impedit laudantium sapiente.
+                Welcome to my blog, where I document my knowledge and
+                experiences as a personal memory bank. This is where I capture
+                thoughts and insights, so I can revisit them whenever needed.
               </p>
             </div>
           </div>
           <div className='flex flex-wrap'>
-            <div className='w-full px-4 lg:w-1/2 xl:w-1/3'>
-              <div className='mb-10 overflow-hidden rounded-xl bg-white shadow-lg'>
-                <Image
-                  src='https://source.unsplash.com/random/360x200?programming'
-                  alt='Blog 1'
-                  width='360'
-                  height='200'
-                  className='w-full'
-                />
-                <div className='px-6 py-8'>
-                  <h3>
-                    <a
-                      href='#'
-                      className='mb-3 block truncate text-xl font-semibold text-dark hover:text-primary'
-                    >
-                      Tips Belajar Programming
-                    </a>
-                  </h3>
-                  <p className='mb-6 text-base font-medium text-secondary'>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Itaque, quia?
-                  </p>
-                  <a
-                    href='#'
-                    className='rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-80'
-                  >
-                    Baca Selengkapnya
-                  </a>
-                </div>
+            {blogs.map((data) => (
+              <div key={data.id} className='w-full px-4 lg:w-1/2 xl:w-1/3'>
+                <CardBlog {...data} />
               </div>
-            </div>
-            <div className='w-full px-4 lg:w-1/2 xl:w-1/3'>
-              <div className='mb-10 overflow-hidden rounded-xl bg-white shadow-lg'>
-                <Image
-                  src='https://source.unsplash.com/random/360x200?programming'
-                  alt='Blog 1'
-                  width='360'
-                  height='200'
-                  className='w-full'
-                />
-                <div className='px-6 py-8'>
-                  <h3>
-                    <a
-                      href='#'
-                      className='mb-3 block truncate text-xl font-semibold text-dark hover:text-primary'
-                    >
-                      Tips Belajar Programming
-                    </a>
-                  </h3>
-                  <p className='mb-6 text-base font-medium text-secondary'>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Itaque, quia?
-                  </p>
-                  <a
-                    href='#'
-                    className='rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-80'
-                  >
-                    Baca Selengkapnya
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div className='w-full px-4 lg:w-1/2 xl:w-1/3'>
-              <div className='mb-10 overflow-hidden rounded-xl bg-white shadow-lg'>
-                <Image
-                  src='https://source.unsplash.com/random/360x200?programming'
-                  alt='Blog 1'
-                  width='360'
-                  height='200'
-                  className='w-full'
-                />
-                <div className='px-6 py-8'>
-                  <h3>
-                    <a
-                      href='#'
-                      className='mb-3 block truncate text-xl font-semibold text-dark hover:text-primary'
-                    >
-                      Tips Belajar Programming
-                    </a>
-                  </h3>
-                  <p className='mb-6 text-base font-medium text-secondary'>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Itaque, quia?
-                  </p>
-                  <a
-                    href='#'
-                    className='rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white hover:opacity-80'
-                  >
-                    Baca Selengkapnya
-                  </a>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

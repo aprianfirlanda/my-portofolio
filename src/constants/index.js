@@ -111,3 +111,13 @@ export const skills = [
     ]
   }
 ]
+
+export const blogs = [
+  {
+    id: 1,
+    imgSrc: '/images/blogs/spring-boot.png',
+    title: 'Spring Boot with Testcontainers',
+    synopsis:
+      "Testcontainers is a Java library that provides lightweight, disposable instances of databases, message brokers, and other services running in Docker containers. It's particularly useful for integration testing because it allows you to:"
+  }
+]
