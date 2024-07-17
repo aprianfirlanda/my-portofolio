@@ -12,16 +12,8 @@ export const navItems = [
     name: 'Portfolio'
   },
   {
-    link: '#clients',
-    name: 'Clients'
-  },
-  {
     link: '#blog',
     name: 'Blog'
-  },
-  {
-    link: '#contact',
-    name: 'Contact'
   }
 ]
 
