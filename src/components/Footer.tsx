@@ -1,70 +1,14 @@
 import React from 'react'
-import { HamburgerMenuProps } from '@/components/HamburgerMenu'
 
 // icons
 import GitHubIcon from '@/icons/github.svg'
 import LinkedInIcon from '@/icons/linkedin.svg'
 import InstagramIcon from '@/icons/instagram.svg'
 
-function Footer({ navItems }: HamburgerMenuProps) {
+function Footer() {
   return (
-    <footer className='bg-dark pb-12 pt-24'>
+    <footer className='bg-dark pb-12'>
       <div className='container'>
-        <div className='flex flex-wrap'>
-          <div className='mb-12 w-full px-4 font-medium text-slate-300 md:w-1/3'>
-            <h2 className='text-4xl font-bold text-white'>WPU</h2>
-            <h3 className='mb-2 text-2xl font-bold'>Hubingi Kami</h3>
-            <p>aprianfirlanda@gmail.com</p>
-            <p>Derwati</p>
-            <p>Bandung</p>
-          </div>
-          <div className='mb-12 w-full px-4 md:w-1/3'>
-            <h3 className='mb-5 text-xl font-semibold text-white'>
-              Kategori Tulisan
-            </h3>
-            <ul className='text-slate-300'>
-              <li>
-                <a
-                  href='#'
-                  className='mb-3 inline-block text-base hover:text-primary'
-                >
-                  Programming
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#'
-                  className='mb-3 inline-block text-base hover:text-primary'
-                >
-                  Teknologi
-                </a>
-              </li>
-              <li>
-                <a
-                  href='#'
-                  className='mb-3 inline-block text-base hover:text-primary'
-                >
-                  Gaya Hidup
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className='mb-12 w-full px-4 md:w-1/3'>
-            <h3 className='mb-5 text-xl font-semibold text-white'>Tautan</h3>
-            <ul className='text-slate-300'>
-              {navItems.map(({ link, name }) => (
-                <li key={link}>
-                  <a
-                    href={link}
-                    className='mb-3 inline-block text-base hover:text-primary'
-                  >
-                    {name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
         <div className='w-full border-t border-slate-700 pt-10'>
           <div className='mb-5 flex items-center justify-center'>
             <a
