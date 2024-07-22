@@ -96,7 +96,77 @@ export default function Home() {
         </div>
       </section>
 
-      <section id='portfolio' className='pb-24 pt-14'>
+      <section id='work-experience' className='pb-24 pt-14'>
+        <div className='container'>
+          <div className='flex flex-wrap'>
+            <div className='mb-5 w-full px-4'>
+              <h1 className='mb-3 text-center text-lg font-bold uppercase text-primary'>
+                Work Experience
+              </h1>
+            </div>
+            <div className='mb-2 w-full px-4'>
+              <div className='flex items-center'>
+                <Image
+                  src='/images/works/tdi.jpeg'
+                  alt='Logo TDI'
+                  width={75}
+                  height={75}
+                  className='mr-3'
+                />
+                <div className='flex flex-wrap'>
+                  <h2 className='w-full text-xl font-bold'>
+                    PT Tabel Data Informatika
+                  </h2>
+                  <p className='w-full text-sm font-semibold text-slate-500'>
+                    6 February 2020 - Now
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className='w-full px-4'>
+              <p className='text-justify text-slate-700'>
+                As a Full Stack Developer, I was responsible for designing,
+                developing, and maintaining both front-end and back-end
+                components of web applications. My key responsibilities
+                included:
+              </p>
+              <ul className='list-outside list-disc pl-4 pt-2'>
+                <li>Design and ship new features</li>
+                <li>Writing clean, maintainable, and efficient code</li>
+                <li>
+                  Building and consuming RESTful APIs to integrate various
+                  services and systems
+                </li>
+                <li>Implementing responsive web design</li>
+                <li>Debugging and troubleshooting issues</li>
+                <li>
+                  Code reviews to maintain high-quality standards and improve
+                  codebase
+                </li>
+                <li>
+                  Continuously learning and adopting new technologies and best
+                  practices
+                </li>
+              </ul>
+              <p className='pt-2 text-justify text-slate-700'>
+                the web applications that have been worked on during my work,
+                namely:
+              </p>
+              <ul className='list-outside list-disc pl-4 pt-2'>
+                <li>SIAP BOS DKI Jakarta</li>
+                <li>SiHalal - BPJPH</li>
+                <li>Sistem Informasi Keuangan Daerah DKI Jakarta</li>
+                <li>Rencana Bisnis Anggaran Badan Layanan Umum DKI Jakarta</li>
+                <li>Dana Pensiun Bank Indonesia (Akunting)</li>
+                <li>Hasjrat Sales Assistant</li>
+                <li>Sistem Informasi Satuan Polisi Pamong Praja DKI Jakarta</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id='portfolio' className='bg-slate-100 pb-24 pt-14'>
         <div className='container'>
           <div className='w-full px-4'>
             <div className='mx-auto mb-16 max-w-xl text-center'>
@@ -109,8 +179,8 @@ export default function Home() {
             </div>
           </div>
           <div className='flex w-full flex-wrap justify-center px-4 xl:mx-auto xl:w-10/12'>
-            <div className='mb-12 p-4 md:w-1/2'>
-              <Link href='https://www.kacasooca.com/'>
+            <div className='group mb-12 rounded-lg p-4 hover:bg-white hover:opacity-90 md:w-1/2'>
+              <Link href='https://www.kacasooca.com/' target='_blank'>
                 <div className='flex overflow-hidden rounded-md shadow-md'>
                   <Image
                     src='/images/projects/kacasooca.png'
@@ -120,7 +190,7 @@ export default function Home() {
                     className='w-full'
                   />
                 </div>
-                <h3 className='mb-3 mt-5 text-xl font-semibold text-dark '>
+                <h3 className='mb-3 mt-5 text-xl font-semibold text-dark group-hover:text-primary'>
                   Kacasooca
                 </h3>
                 <p className='text-base font-medium text-secondary'>
@@ -133,7 +203,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id='blog' className='bg-slate-100 pb-32 pt-36'>
+      <section id='blog' className='pb-32 pt-36'>
         <div className='container'>
           <div className='w-full px-4'>
             <div className='mx-auto mb-16 max-w-xl text-center'>
