@@ -1,32 +1,30 @@
-import daisyui from "daisyui";
-import {light} from 'daisyui/src/theming/themes';
+import daisyui from 'daisyui';
+import { light } from 'daisyui/src/theming/themes';
 
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    content: [
-        "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-        "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    ],
-    theme: {
-        extend: {
-            container: {
-                center: true,
-            },
+  content: [
+    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
+    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  theme: {
+    extend: {
+      container: {
+        center: true,
+      },
+    },
+  },
+  plugins: [daisyui],
+  daisyui: {
+    themes: [
+      {
+        light: {
+          ...light,
+          primary: '#14b8a6',
         },
-    },
-    plugins: [
-        daisyui,
+      },
     ],
-    daisyui: {
-        themes: [
-            {
-                "light": {
-                    ...light,
-                    primary: '#14b8a6',
-                }
-            }
-        ],
-    },
+  },
 };
