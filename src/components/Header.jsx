@@ -2,8 +2,9 @@
 
 import React, { useEffect } from 'react';
 import HamburgerMenu from '@/components/HamburgerMenu';
+import Link from 'next/link';
 
-function Header({ navItems }) {
+function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector('header');
@@ -29,13 +30,13 @@ function Header({ navItems }) {
       <div className="container">
         <div className="relative flex items-center justify-between">
           <div className="px-4">
-            <a href="#home" className="block py-6 text-lg font-bold text-transparent">
+            <Link href="/#home" className="block py-6 text-lg font-bold text-transparent">
               <span className="bg-gradient-to-r from-teal-400 to-blue-300 bg-clip-text">
                 virlandd.dev
               </span>
-            </a>
+            </Link>
           </div>
-          <HamburgerMenu navItems={navItems} />
+          <HamburgerMenu />
         </div>
       </div>
     </header>

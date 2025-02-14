@@ -1,6 +1,8 @@
 import React from 'react';
+import Link from 'next/link';
+import { navItems } from '@/constants';
 
-function HamburgerMenu({ navItems }) {
+function HamburgerMenu() {
   const toggleHamburger = () => {
     const hamburger = document.querySelector('#hamburger');
     const navMenu = document.querySelector('#nav-menu');
@@ -33,9 +35,9 @@ function HamburgerMenu({ navItems }) {
         <ul className="block lg:flex">
           {navItems.map(({ link, name }) => (
             <li key={link} className="group">
-              <a href={link} className="mx-8 flex py-2 text-base group-hover:text-primary">
+              <Link href={link} className="mx-8 flex py-2 text-base group-hover:text-primary">
                 {name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

@@ -1,8 +1,6 @@
 import Image from 'next/image';
-import Header from '@/components/Header';
-import { navItems, skills } from '@/constants';
+import { skills } from '@/constants';
 import Footer from '@/components/Footer';
-import SidebarSocialMedia from '@/components/SidebarSocialMedia';
 import CardSkill from '@/components/CardSkill';
 import Link from 'next/link';
 import CardBlog from '@/components/CardBlog';
@@ -11,10 +9,6 @@ import { FaWhatsapp } from 'react-icons/fa6';
 export default function Home() {
   return (
     <>
-      <SidebarSocialMedia />
-
-      <Header navItems={navItems} />
-
       <section id="home" className="pt-24 lg:h-screen lg:pt-36">
         <div className="container">
           <div className="flex flex-wrap">
