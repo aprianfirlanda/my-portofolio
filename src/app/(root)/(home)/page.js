@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Header from '@/components/Header'
-import { blogs, navItems, skills } from '@/constants'
+import { navItems, skills } from '@/constants'
 import Footer from '@/components/Footer'
 import SidebarSocialMedia from '@/components/SidebarSocialMedia'
 import CardSkill from '@/components/CardSkill'
@@ -201,30 +201,7 @@ export default function Home() {
                 </div>
             </section>
 
-            <section id='blog' className='pb-32 pt-36'>
-                <div className='container'>
-                    <div className='w-full px-4'>
-                        <div className='mx-auto mb-16 max-w-xl text-center'>
-                            <h4 className='mb-2 text-lg font-semibold text-primary'>Blog</h4>
-                            <h2 className='mb-4 text-3xl font-bold sm:text-4xl md:text-5xl'>
-                                Latest Post
-                            </h2>
-                            <p className='text-base font-medium md:text-lg'>
-                                Welcome to my blog, where I document my knowledge and
-                                experiences as a personal memory bank. This is where I capture
-                                thoughts and insights, so I can revisit them whenever needed.
-                            </p>
-                        </div>
-                    </div>
-                    <div className='flex flex-wrap'>
-                        {blogs.map((data) => (
-                            <div key={data.id} className='w-full px-4 lg:w-1/2 xl:w-1/3'>
-                                <CardBlog {...data} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            <CardBlog/>
 
             <Footer />
         </>
