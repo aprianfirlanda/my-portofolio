@@ -209,7 +209,7 @@ export default function Home() {
                             <h2 className='mb-4 text-3xl font-bold sm:text-4xl md:text-5xl'>
                                 Latest Post
                             </h2>
-                            <p className='text-base font-medium text-secondary md:text-lg'>
+                            <p className='text-base font-medium md:text-lg'>
                                 Welcome to my blog, where I document my knowledge and
                                 experiences as a personal memory bank. This is where I capture
                                 thoughts and insights, so I can revisit them whenever needed.
