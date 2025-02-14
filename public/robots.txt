@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://aprianfi.my.id
+
+# Sitemaps
+Sitemap: https://aprianfi.my.id/sitemap.xml
