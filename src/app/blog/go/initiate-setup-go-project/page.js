@@ -87,6 +87,21 @@ function ContentSetupCobraCli() {
       <div className="w-full">
         <CodeBlock code={'cobra-cli add http'} />
       </div>
+      <BlogParagraph content="after you initiate with cobra-cli, the folder structure will be like this." />
+      <div className="w-full">
+        <CodeBlock
+          language="plaintext"
+          code={
+            'myapp/\n' +
+            '│── cmd/\n' +
+            '│   ├── root.go\n' +
+            '│   ├── serve.go\n' +
+            '│── main.go\n' +
+            '│── go.mod\n' +
+            '│── go.sum'
+          }
+        />
+      </div>
     </BlogSection>
   );
 }
