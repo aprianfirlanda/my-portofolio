@@ -1,61 +1,117 @@
 import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
+import {
+  BlogList,
+  BlogNavigation,
+  BlogParagraph,
+  BlogSection,
+  BlogSubTitle,
+  BlogTitle,
+} from '@/components/Blogging';
+
+function ContentIntro() {
+  return (
+    <BlogSection>
+      <BlogParagraph content="When developing a backend web application in Go, structuring the project with Hexagonal Architecture ensures maintainability, testability, and flexibility. In this guide, we'll set up a Go backend project with the following technologies:" />
+      <BlogList
+        contents={[
+          'Cobra CLI for command management',
+          'Go Fiber for the HTTP server',
+          'Swaggo for API documentation',
+          'Gorm with PostgreSQL for database interactions',
+          'Viper for environment variable management',
+          'Logrus for structured logging',
+        ]}
+      />
+    </BlogSection>
+  );
+}
+
+function ContentInstallGo() {
+  return (
+    <BlogSection>
+      <BlogSubTitle id="install-go" content="Install Go" />
+      <p>
+        Before starting, you need to install Go. Visit the{' '}
+        <Link href={'https://go.dev/doc/install'} target={'_blank'} className="link link-primary">
+          official Go website
+        </Link>{' '}
+        to download the installer. The installation process varies by operating system:
+      </p>
+      <ul className="list-disc pl-5">
+        <li>Windows: Use the MSI installer and follow the setup instructions.</li>
+        <li>MacOS: Use Homebrew with brew install go or download the macOS package.</li>
+        <li>
+          Linux: Use your package manager, such as{' '}
+          <code className="badge badge-ghost">sudo apt install golang</code> for Debian-based
+          systems or <code className="badge badge-ghost">sudo dnf install golang</code> for Fedora.
+        </li>
+      </ul>
+      <p>After installation, verify it by running:</p>
+      <div className="w-full">
+        <CodeBlock code={'go version'} />
+      </div>
+    </BlogSection>
+  );
+}
+
+function ContentProjectInitialization() {
+  return (
+    <BlogSection>
+      <BlogSubTitle id="project-initialization" content="Project Initialization" />
+      <BlogParagraph content="First, create a new directory with the name of backend service" />
+      <div className="w-full">
+        <CodeBlock code={'mkdir go-fiber-temp && cd go-fiber-temp'} />
+      </div>
+      <BlogParagraph content="the, initialize go module with this command" />
+      <div className="w-full">
+        <CodeBlock code={'go mod init go-fiber-temp'} />
+      </div>
+    </BlogSection>
+  );
+}
+
+function ContentSetupCobraCli() {
+  return (
+    <BlogSection>
+      <BlogSubTitle id="setup-cobra-cli" content="Setting Up Cobra CLI" />
+      <BlogParagraph content="Install cobra-cli, if you already install, you can skip this command" />
+      <div className="w-full">
+        <CodeBlock code={'go install github.com/spf13/cobra-cli@latest'} />
+      </div>
+      <BlogParagraph content="Initialize cobra-cli in this backend project" />
+      <div className="w-full">
+        <CodeBlock code={'cobra-cli init'} />
+      </div>
+      <BlogParagraph content="Add http command, to handle running http server" />
+      <div className="w-full">
+        <CodeBlock code={'cobra-cli add http'} />
+      </div>
+    </BlogSection>
+  );
+}
 
 export default function Page() {
   return (
     <div className="container pt-20">
-      <div className="flex gap-5 mt-5">
-        <ul className="menu bg-base-200 rounded-box w-56 h-[80vh] shrink-0">
-          <li>
-            <Link href={`/blog/go/initiate-setup-go-project#install-go`}>Install Go</Link>
-          </li>
-          <li>
-            <a>Item 3</a>
-          </li>
-        </ul>
-        <div>
-          <h1 className="text-4xl font-bold">Initiate Setup Go Project</h1>
-          <p className="py-3">
-            When developing a backend web application in Go, structuring the project with Hexagonal
-            Architecture ensures maintainability, testability, and flexibility. In this guide, we'll
-            set up a Go backend project with the following technologies:
-          </p>
-          <ul className="list-disc list-inside">
-            <li>Cobra CLI for command management</li>
-            <li>Go Fiber for the HTTP server</li>
-            <li>Swaggo for API documentation</li>
-            <li>Gorm with PostgreSQL for database interactions</li>
-            <li>Viper for environment variable management</li>
-            <li>Logrus for structured logging</li>
-          </ul>
-          <h2 id="install-go" className="text-2xl font-semibold pt-3 pb-1">
-            # Install Go
-          </h2>
-          <p>
-            Before starting, you need to install Go. Visit the{' '}
-            <Link
-              href={'https://go.dev/doc/install'}
-              target={'_blank'}
-              className="link link-primary"
-            >
-              official Go website
-            </Link>{' '}
-            to download the installer. The installation process varies by operating system:
-          </p>
-          <ul className="list-disc list-inside">
-            <li>Windows: Use the MSI installer and follow the setup instructions.</li>
-            <li>MacOS: Use Homebrew with brew install go or download the macOS package.</li>
-            <li>
-              Linux: Use your package manager, such as{' '}
-              <code className="badge badge-ghost">sudo apt install golang</code> for Debian-based
-              systems or <code className="badge badge-ghost">sudo dnf install golang</code> for
-              Fedora.
-            </li>
-          </ul>
-          <p>After installation, verify it by running:</p>
-          <div className="w-40">
-            <CodeBlock code={'go version'} />
-          </div>
+      <BlogTitle content="Initiate Setup Go Project" />
+      <div className="flex gap-5">
+        <BlogNavigation
+          contents={[
+            { id: 'install-go', name: 'Install Go' },
+            { id: 'project-initialization', name: 'Project Initialization' },
+            { id: 'setup-cobra-cli', name: 'Setting Up Cobra CLI' },
+          ]}
+        />
+
+        <div className="h-[80vh] overflow-auto">
+          <ContentIntro />
+
+          <ContentInstallGo />
+
+          <ContentProjectInitialization />
+
+          <ContentSetupCobraCli />
         </div>
       </div>
     </div>
