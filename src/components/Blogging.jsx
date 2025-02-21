@@ -20,16 +20,16 @@ export function BlogNavigation({ category, link, contents }) {
   );
 }
 
-export function BlogSection({ children }) {
-  return <section className="mt-8">{children}</section>;
+export function BlogSection({ id, children }) {
+  return (
+    <section id={id} className="mt-8">
+      {children}
+    </section>
+  );
 }
 
-export function BlogSubTitle({ id, content }) {
-  return (
-    <h2 id={id} className="text-2xl font-semibold pb-2">
-      # {content}
-    </h2>
-  );
+export function BlogSubTitle({ content }) {
+  return <h2 className="text-2xl font-semibold pb-2"># {content}</h2>;
 }
 
 export function BlogParagraph({ content }) {

@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
 import {
@@ -11,7 +12,7 @@ import {
 
 function ContentIntro() {
   return (
-    <BlogSection>
+    <BlogSection id="intro">
       <BlogParagraph content="When building a backend web application in Go, structuring the project with Hexagonal Architecture ensures maintainability, testability, and flexibility. In this guide, we'll set up a Go backend project with the following technologies:" />
       <BlogList
         contents={[
@@ -29,8 +30,8 @@ function ContentIntro() {
 
 function ContentInstallGo() {
   return (
-    <BlogSection>
-      <BlogSubTitle id="install-go" content="Install Go" />
+    <BlogSection id="install-go">
+      <BlogSubTitle content="Install Go" />
       <p>
         Before starting, you need to install Go. Visit the{' '}
         <Link href={'https://go.dev/doc/install'} target={'_blank'} className="link link-primary">
@@ -57,8 +58,8 @@ function ContentInstallGo() {
 
 function ContentProjectInitialization() {
   return (
-    <BlogSection>
-      <BlogSubTitle id="project-initialization" content="Project Initialization" />
+    <BlogSection id="project-initialization">
+      <BlogSubTitle content="Project Initialization" />
       <BlogParagraph content="First, create a new directory with the name of backend service" />
       <div className="w-full">
         <CodeBlock code={'mkdir go-fiber-temp && cd go-fiber-temp'} />
@@ -118,8 +119,8 @@ function ContentProjectInitialization() {
 
 function ContentSetupCobraCli() {
   return (
-    <BlogSection>
-      <BlogSubTitle id="setup-cobra-cli" content="Setting Up Cobra CLI" />
+    <BlogSection id="setup-cobra-cli">
+      <BlogSubTitle content="Setting Up Cobra CLI" />
       <BlogParagraph content="Install cobra-cli, if you already install, you can skip this command" />
       <div className="w-full">
         <CodeBlock code={'go install github.com/spf13/cobra-cli@latest'} />
