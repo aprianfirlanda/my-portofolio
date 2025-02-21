@@ -7,10 +7,34 @@ import { BlogParagraph } from '@/components/blogs/BlogParagraph';
 import { BlogSubTitle } from '@/components/blogs/BlogSubTitle';
 import { BlogTitle } from '@/components/blogs/BlogTitle';
 import { BlogNavigation } from '@/components/blogs/BlogNavigation';
+import React, { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
+import Image from 'next/image';
 
-function ContentIntro() {
+function ContentIntro({ onVisible }) {
+  const id = 'intro';
+  const { ref, inView } = useInView({
+    threshold: 1,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
   return (
-    <BlogSection id="intro">
+    <BlogSection ref={ref} id={id}>
+      <div className="flex w-full justify-center">
+        <Image
+          src={'/images/blogs/go-project-setup-guide.png'}
+          alt={'init setup go project image'}
+          width={467}
+          height={315}
+          priority
+        />
+      </div>
       <BlogParagraph content="When building a backend web application in Go, structuring the project with Hexagonal Architecture ensures maintainability, testability, and flexibility. In this guide, we'll set up a Go backend project with the following technologies:" />
       <BlogList
         contents={[
@@ -26,9 +50,21 @@ function ContentIntro() {
   );
 }
 
-function ContentInstallGo() {
+function ContentInstallGo({ onVisible }) {
+  const id = 'install-go';
+  const { ref, inView } = useInView({
+    threshold: 1,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
   return (
-    <BlogSection id="install-go">
+    <BlogSection ref={ref} id={id}>
       <BlogSubTitle content="Install Go" />
       <p>
         Before starting, you need to install Go. Visit the{' '}
@@ -54,9 +90,21 @@ function ContentInstallGo() {
   );
 }
 
-function ContentProjectInitialization() {
+function ContentProjectInitialization({ onVisible }) {
+  const id = 'project-initialization';
+  const { ref, inView } = useInView({
+    threshold: 0.6,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
   return (
-    <BlogSection id="project-initialization">
+    <BlogSection ref={ref} id={id}>
       <BlogSubTitle content="Project Initialization" />
       <BlogParagraph content="First, create a new directory with the name of backend service" />
       <div className="w-full">
@@ -115,9 +163,21 @@ function ContentProjectInitialization() {
   );
 }
 
-function ContentSetupCobraCli() {
+function ContentSetupCobraCli({ onVisible }) {
+  const id = 'setup-cobra-cli';
+  const { ref, inView } = useInView({
+    threshold: 0.6,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
   return (
-    <BlogSection id="setup-cobra-cli">
+    <BlogSection ref={ref} id={id}>
       <BlogSubTitle content="Setting Up Cobra CLI" />
       <BlogParagraph content="Install cobra-cli, if you already install, you can skip this command" />
       <div className="w-full">
@@ -151,14 +211,22 @@ function ContentSetupCobraCli() {
 }
 
 export default function Page() {
+  const [activeSectionId, setActiveSectionId] = useState('intro');
+
+  useEffect(() => {
+    window.history.replaceState(null, '', `#${activeSectionId}`);
+  }, [activeSectionId]);
+
   return (
     <div className="container pt-20">
       <BlogTitle content="Go Project Setup Guide" />
       <div className="flex gap-5">
         <BlogNavigation
+          activeId={activeSectionId}
           category="go"
           link="go-project-setup-guide"
           contents={[
+            { id: 'intro', name: 'Introduction' },
             { id: 'install-go', name: 'Install Go' },
             { id: 'project-initialization', name: 'Project Initialization' },
             { id: 'setup-cobra-cli', name: 'Setting Up Cobra CLI' },
@@ -166,13 +234,13 @@ export default function Page() {
         />
 
         <div className="h-[80vh] overflow-auto">
-          <ContentIntro />
+          <ContentIntro onVisible={setActiveSectionId} />
 
-          <ContentInstallGo />
+          <ContentInstallGo onVisible={setActiveSectionId} />
 
-          <ContentProjectInitialization />
+          <ContentProjectInitialization onVisible={setActiveSectionId} />
 
-          <ContentSetupCobraCli />
+          <ContentSetupCobraCli onVisible={setActiveSectionId} />
         </div>
       </div>
     </div>

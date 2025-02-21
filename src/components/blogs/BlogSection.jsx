@@ -1,6 +1,6 @@
-export function BlogSection({ id, children }) {
+export function BlogSection({ id, ref, children }) {
   return (
-    <section id={id} className="mt-8">
+    <section ref={ref} id={id} className="mt-8">
       {children}
     </section>
   );
