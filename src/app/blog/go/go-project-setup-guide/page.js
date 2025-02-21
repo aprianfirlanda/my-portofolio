@@ -157,6 +157,8 @@ export default function Page() {
       <BlogTitle content="Go Project Setup Guide" />
       <div className="flex gap-5">
         <BlogNavigation
+          category="go"
+          link="go-project-setup-guide"
           contents={[
             { id: 'install-go', name: 'Install Go' },
             { id: 'project-initialization', name: 'Project Initialization' },
