@@ -12,7 +12,7 @@ import {
 function ContentIntro() {
   return (
     <BlogSection>
-      <BlogParagraph content="When developing a backend web application in Go, structuring the project with Hexagonal Architecture ensures maintainability, testability, and flexibility. In this guide, we'll set up a Go backend project with the following technologies:" />
+      <BlogParagraph content="When building a backend web application in Go, structuring the project with Hexagonal Architecture ensures maintainability, testability, and flexibility. In this guide, we'll set up a Go backend project with the following technologies:" />
       <BlogList
         contents={[
           'Cobra CLI for command management',
@@ -47,7 +47,7 @@ function ContentInstallGo() {
           systems or <code className="badge badge-ghost">sudo dnf install golang</code> for Fedora.
         </li>
       </ul>
-      <p>After installation, verify it by running:</p>
+      <BlogParagraph>After installation, verify it by running:</BlogParagraph>
       <div className="w-full">
         <CodeBlock code={'go version'} />
       </div>
@@ -67,6 +67,51 @@ function ContentProjectInitialization() {
       <div className="w-full">
         <CodeBlock code={'go mod init go-fiber-temp'} />
       </div>
+      <BlogParagraph content="File go.mod will be created." />
+      <BlogParagraph content="I will use Hexagonal Architecture Pattern. So, the folder structure will be like this." />
+      <div className="w-full">
+        <CodeBlock
+          language="plaintext"
+          code={
+            'go-fiber-temp/\n' +
+            '│── cmd/                         # Entry points (CLI, HTTP)\n' +
+            '│  │── http.go                   # Starts HTTP server\n' +
+            '│  │── root.go                   # Root command for CLI (Cobra)\n' +
+            '│── config/                      # Configuration files (optional, move inside internal/)\n' +
+            '│── db/                          # Database-related logic\n' +
+            '│  │── migrations/               # Database migration scripts\n' +
+            '│── docs/                        # Swaggo API documentation\n' +
+            '│── internal/                    # Internal application logic\n' +
+            '│  │── app/                      # Application services (Use cases)\n' +
+            '│  │  │── dto/                   # DTOs for HTTP request/response\n' +
+            '│  │  │── serviceimpl/           # Service implementations (business logic)\n' +
+            '│  │── config/                   # Internal configuration handling\n' +
+            '│  │── domain/                   # Domain entities and aggregates\n' +
+            '│  │── port/                     # Interfaces (e.g., repository, service, external APIs)\n' +
+            '│  │  │── repository/            # Repository interfaces\n' +
+            '│  │  │── external/              # External API interface\n' +
+            '│  │  │── service/               # Service interfaces\n' +
+            '│  │── adapter/                  # Implementations of ports\n' +
+            '│  │  │── http/                  # HTTP handlers/controllers\n' +
+            '│  │  │── repository/            # Repository implementations (Gorm, etc.)\n' +
+            '│  │  │── external/              # External API implementation\n' +
+            '│── main.go                      # Application entry point\n' +
+            '│── go.mod                       # Go module file\n' +
+            '│── go.sum                       # Go dependencies checksum'
+          }
+        />
+      </div>
+      <BlogParagraph content="You can use this command to create necesary folder." />
+      <div className="w-full">
+        <CodeBlock
+          language="plaintext"
+          code={
+            'mkdir -p config db/migrations docs internal/{app/{dto,serviceimpl},config,domain,port/{repository,external,service},adapter/{http,repository,external}}\n' +
+            'find . -type d -empty -exec touch {}/.gitkeep \\;'
+          }
+        />
+      </div>
+      <BlogParagraph content="* main.go and cmd folder (also file inside it) will be automatically created on setup cobra-cli" />
     </BlogSection>
   );
 }
@@ -109,7 +154,7 @@ function ContentSetupCobraCli() {
 export default function Page() {
   return (
     <div className="container pt-20">
-      <BlogTitle content="Initiate Setup Go Project" />
+      <BlogTitle content="Go Project Setup Guide" />
       <div className="flex gap-5">
         <BlogNavigation
           contents={[

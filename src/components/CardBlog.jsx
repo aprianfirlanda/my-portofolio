@@ -19,11 +19,11 @@ function CardBlog() {
         </div>
         <div className="flex flex-wrap">
           <div className="w-full px-4 lg:w-1/2 xl:w-1/3">
-            <Link href={`/blog/go/initiate-setup-go-project`}>
+            <Link href={`/blog/go/go-project-setup-guide`}>
               <div className="mb-10 overflow-hidden rounded-xl bg-white shadow-lg">
                 <div className="flex w-full justify-center">
                   <Image
-                    src={'/images/blogs/initiate-setup-go-project.png'}
+                    src={'/images/blogs/go-project-setup-guide.png'}
                     alt={'init setup go project image'}
                     width={250}
                     height={250}
