@@ -6,7 +6,7 @@ import { BlogSection } from '@/components/blogs/BlogSection';
 import { BlogParagraph } from '@/components/blogs/BlogParagraph';
 import { BlogSubTitle } from '@/components/blogs/BlogSubTitle';
 import { BlogTitle } from '@/components/blogs/BlogTitle';
-import { BlogNavigation } from '@/components/blogs/BlogNavigation';
+import { BlogMenu } from '@/components/blogs/BlogMenu';
 import React, { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Image from 'next/image';
@@ -166,7 +166,7 @@ function ContentProjectInitialization({ onVisible }) {
 function ContentSetupCobraCli({ onVisible }) {
   const id = 'setup-cobra-cli';
   const { ref, inView } = useInView({
-    threshold: 0.6,
+    threshold: 1,
     triggerOnce: false,
   });
 
@@ -187,23 +187,42 @@ function ContentSetupCobraCli({ onVisible }) {
       <div className="w-full">
         <CodeBlock code={'cobra-cli init'} />
       </div>
-      <BlogParagraph content="Add http command, to handle running http server" />
-      <div className="w-full">
-        <CodeBlock code={'cobra-cli add http'} />
-      </div>
       <BlogParagraph content="after you initiate with cobra-cli, the folder structure will be like this." />
       <div className="w-full">
         <CodeBlock
           language="plaintext"
-          code={
-            'myapp/\n' +
-            '│── cmd/\n' +
-            '│   ├── root.go\n' +
-            '│   ├── serve.go\n' +
-            '│── main.go\n' +
-            '│── go.mod\n' +
-            '│── go.sum'
-          }
+          code={'go-fiber-temp/\n' + '│── cmd/\n' + '│   ├── root.go\n' + '│── main.go\n'}
+        />
+      </div>
+    </BlogSection>
+  );
+}
+
+function ContentSetupCobraCliHTTP({ onVisible }) {
+  const id = 'setup-cobra-cli/http';
+  const { ref, inView } = useInView({
+    threshold: 1,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
+  return (
+    <BlogSection ref={ref} id={id}>
+      <BlogSubTitle content="# HTTP Server" />
+      <BlogParagraph content="Add http command, to handle running http server" />
+      <div className="w-full">
+        <CodeBlock code={'cobra-cli add http'} />
+        <BlogParagraph content="There will be http.go file under cmd folder" />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="plaintext"
+          code={'go-fiber-temp/\n' + '│── cmd/\n' + '│   ├── root.go\n' + '│   ├── http.go\n'}
         />
       </div>
     </BlogSection>
@@ -221,7 +240,7 @@ export default function Page() {
     <div className="container pt-20">
       <BlogTitle content="Go Project Setup Guide" />
       <div className="flex gap-5">
-        <BlogNavigation
+        <BlogMenu
           activeId={activeSectionId}
           category="go"
           link="go-project-setup-guide"
@@ -229,7 +248,11 @@ export default function Page() {
             { id: 'intro', name: 'Introduction' },
             { id: 'install-go', name: 'Install Go' },
             { id: 'project-initialization', name: 'Project Initialization' },
-            { id: 'setup-cobra-cli', name: 'Setting Up Cobra CLI' },
+            {
+              id: 'setup-cobra-cli',
+              name: 'Setting Up Cobra CLI',
+              children: [{ id: 'setup-cobra-cli/http', name: 'HTTP Server' }],
+            },
           ]}
         />
 
@@ -241,6 +264,8 @@ export default function Page() {
           <ContentProjectInitialization onVisible={setActiveSectionId} />
 
           <ContentSetupCobraCli onVisible={setActiveSectionId} />
+
+          <ContentSetupCobraCliHTTP onVisible={setActiveSectionId} />
         </div>
       </div>
     </div>
