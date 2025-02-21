@@ -31,7 +31,7 @@ function CardBlog() {
                 </div>
                 <div className="px-6 py-8">
                   <h3 className="mb-3 block truncate text-xl font-semibold hover:text-primary">
-                    Initiate Setup Go Project
+                    Go Project Setup Guide
                   </h3>
                   <p className="mb-6 text-base font-medium">
                     This article covers setting up a new backend project with Go. The tech stack
