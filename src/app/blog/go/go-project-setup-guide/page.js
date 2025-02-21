@@ -1,14 +1,12 @@
 'use client';
 import Link from 'next/link';
 import CodeBlock from '@/components/CodeBlock';
-import {
-  BlogList,
-  BlogNavigation,
-  BlogParagraph,
-  BlogSection,
-  BlogSubTitle,
-  BlogTitle,
-} from '@/components/Blogging';
+import { BlogList } from '@/components/blogs/BlogList';
+import { BlogSection } from '@/components/blogs/BlogSection';
+import { BlogParagraph } from '@/components/blogs/BlogParagraph';
+import { BlogSubTitle } from '@/components/blogs/BlogSubTitle';
+import { BlogTitle } from '@/components/blogs/BlogTitle';
+import { BlogNavigation } from '@/components/blogs/BlogNavigation';
 
 function ContentIntro() {
   return (
