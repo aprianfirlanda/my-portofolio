@@ -124,7 +124,6 @@ function ContentProjectInitialization({ onVisible }) {
             '│── cmd/                         # Entry points (CLI, HTTP)\n' +
             '│  │── http.go                   # Starts HTTP server\n' +
             '│  │── root.go                   # Root command for CLI (Cobra)\n' +
-            '│── config/                      # Configuration files (optional, move inside internal/)\n' +
             '│── db/                          # Database-related logic\n' +
             '│  │── migrations/               # Database migration scripts\n' +
             '│── docs/                        # Swaggo API documentation\n' +
@@ -153,12 +152,16 @@ function ContentProjectInitialization({ onVisible }) {
         <CodeBlock
           language="plaintext"
           code={
-            'mkdir -p config db/migrations docs internal/{app/{dto,serviceimpl},config,domain,port/{repository,external,service},adapter/{http,repository,external}}\n' +
+            'mkdir -p db/migrations docs internal/{app/{dto,serviceimpl},config,domain,port/{repository,external,service},adapter/{http,repository,external}}\n' +
             'find . -type d -empty -exec touch {}/.gitkeep \\;'
           }
         />
       </div>
       <BlogParagraph content="* main.go and cmd folder (also file inside it) will be automatically created on setup cobra-cli" />
+      <BlogParagraph content="Install testify lib for testing on project." />
+      <div className="w-full">
+        <CodeBlock code={'go get github.com/stretchr/testify'} />
+      </div>
     </BlogSection>
   );
 }
@@ -217,12 +220,101 @@ function ContentSetupCobraCliHTTP({ onVisible }) {
       <BlogParagraph content="Add http command, to handle running http server" />
       <div className="w-full">
         <CodeBlock code={'cobra-cli add http'} />
-        <BlogParagraph content="There will be http.go file under cmd folder" />
       </div>
+      <BlogParagraph content="There will be http.go file under cmd folder" />
       <div className="w-full">
         <CodeBlock
           language="plaintext"
           code={'go-fiber-temp/\n' + '│── cmd/\n' + '│   ├── root.go\n' + '│   ├── http.go\n'}
+        />
+      </div>
+    </BlogSection>
+  );
+}
+
+function ContentSetupConfig({ onVisible }) {
+  const id = 'setup-config';
+  const { ref, inView } = useInView({
+    threshold: 1,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
+  return (
+    <BlogSection ref={ref} id={id}>
+      <BlogSubTitle content="Setting Up Configuration" />
+      <BlogParagraph content="There is a few setup that need to be done" />
+    </BlogSection>
+  );
+}
+
+function ContentSetupConfigViper({ onVisible }) {
+  const id = 'setup-config/viper';
+  const { ref, inView } = useInView({
+    threshold: 1,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
+  return (
+    <BlogSection ref={ref} id={id}>
+      <BlogSubTitle content="# Viper" />
+      <BlogParagraph content="Install dependency" />
+      <div className="w-full">
+        <CodeBlock code={'go get github.com/spf13/viper'} />
+      </div>
+      <BlogParagraph content="Create new file .env (Only needed while running local. So, put this file on .gitignore). For production mode, we will use os env variable." />
+      <div className="w-full">
+        <CodeBlock code={'touch .env'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="ini"
+          code={
+            'HTTP_PORT=8080\n' +
+            '\n' +
+            'DB_HOST=localhost\n' +
+            'DB_PORT=5432\n' +
+            'DB_USER=postgres\n' +
+            'DB_PASSWORD=password\n' +
+            'DB_NAME=userdb\n' +
+            '\n' +
+            'LOG_LEVEL=info\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Create new file internal/config/viper.go" />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/viper.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"fmt"\n	"github.com/spf13/viper"\n)\n\nfunc LoadConfig(fileName string) {\n	viper.AutomaticEnv()\n\n	viper.SetConfigFile(fileName)\n	viper.SetConfigType("env")\n	if err := viper.ReadInConfig(); err != nil {\n		fmt.Println("There is no env file. It is a problem if you run in local mode. If it is not, then it is ok.")\n	}\n}\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Create unit test to check, are we can get value from env variable on dev or prod mod." />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/viper_test.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n	"github.com/stretchr/testify/require"\n)\n\n// Test LoadConfig in production mode (reading from OS environment variables)\nfunc TestLoadConfig_Production(t *testing.T) {\n	defer os.Clearenv()\n	os.Setenv("HTTP_PORT", "9090")\n	os.Setenv("DB_HOST", "prod-db")\n	os.Setenv("DB_PORT", "5433")\n	os.Setenv("DB_USER", "prod_user")\n	os.Setenv("DB_PASSWORD", "prod_password")\n	os.Setenv("DB_NAME", "prod_db")\n	os.Setenv("LOG_LEVEL", "warn")\n\n	viper.Reset()\n	LoadConfig("")\n\n	assert.Equal(t, "9090", viper.GetString("HTTP_PORT"))\n	assert.Equal(t, "prod-db", viper.GetString("DB_HOST"))\n	assert.Equal(t, 5433, viper.GetInt("DB_PORT"))\n	assert.Equal(t, "prod_user", viper.GetString("DB_USER"))\n	assert.Equal(t, "prod_password", viper.GetString("DB_PASSWORD"))\n	assert.Equal(t, "prod_db", viper.GetString("DB_NAME"))\n	assert.Equal(t, "warn", viper.GetString("LOG_LEVEL"))\n}\n\n// Test LoadConfig in development mode (reading from .env)\nfunc TestLoadConfig_Development(t *testing.T) {\n	fileName := ".env.test"\n	mockEnv := `HTTP_PORT=8080\n				\n				DB_HOST=localhost\n				DB_PORT=5432\n				DB_USER=postgres\n				DB_PASSWORD=password\n				DB_NAME=userdb\n				\n				LOG_LEVEL=info\n				`\n	err := os.WriteFile(fileName, []byte(mockEnv), 0644)\n	require.NoError(t, err)\n	defer os.Remove(fileName)\n\n	viper.Reset()\n	LoadConfig(fileName)\n\n	assert.Equal(t, "8080", viper.GetString("HTTP_PORT"))\n	assert.Equal(t, "localhost", viper.GetString("DB_HOST"))\n	assert.Equal(t, 5432, viper.GetInt("DB_PORT"))\n	assert.Equal(t, "postgres", viper.GetString("DB_USER"))\n	assert.Equal(t, "password", viper.GetString("DB_PASSWORD"))\n	assert.Equal(t, "userdb", viper.GetString("DB_NAME"))\n	assert.Equal(t, "info", viper.GetString("LOG_LEVEL"))\n}\n'
+          }
         />
       </div>
     </BlogSection>
@@ -253,6 +345,16 @@ export default function Page() {
               name: 'Setting Up Cobra CLI',
               children: [{ id: 'setup-cobra-cli/http', name: 'HTTP Server' }],
             },
+            {
+              id: 'setup-config',
+              name: 'Setup Config',
+              children: [
+                { id: 'setup-config/viper', name: 'Viper' },
+                { id: 'setup-config/gorm', name: 'GORM' },
+                { id: 'setup-config/logrus', name: 'Logrus' },
+                { id: 'setup-config/swaggo', name: 'Swaggo' },
+              ],
+            },
           ]}
         />
 
@@ -264,8 +366,10 @@ export default function Page() {
           <ContentProjectInitialization onVisible={setActiveSectionId} />
 
           <ContentSetupCobraCli onVisible={setActiveSectionId} />
-
           <ContentSetupCobraCliHTTP onVisible={setActiveSectionId} />
+
+          <ContentSetupConfig onVisible={setActiveSectionId} />
+          <ContentSetupConfigViper onVisible={setActiveSectionId} />
         </div>
       </div>
     </div>
