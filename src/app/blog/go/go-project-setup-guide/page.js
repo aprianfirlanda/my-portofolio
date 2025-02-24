@@ -321,6 +321,54 @@ function ContentSetupConfigViper({ onVisible }) {
   );
 }
 
+function ContentSetupConfigLogrus({ onVisible }) {
+  const id = 'setup-config/logrus';
+  const { ref, inView } = useInView({
+    threshold: 1,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
+  return (
+    <BlogSection ref={ref} id={id}>
+      <BlogSubTitle content="# Viper" />
+      <BlogParagraph content="Install dependency" />
+      <div className="w-full">
+        <CodeBlock code={'go get github.com/sirupsen/logrus'} />
+      </div>
+      <BlogParagraph content="Create new file internal/config/logrus.go. Get the log level from env variable. if there is not set, then the log level is info. I also using json formatter for the log." />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/logrus.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"github.com/sirupsen/logrus"\n	"github.com/spf13/viper"\n)\n\nvar Logger *logrus.Logger\n\nfunc InitLogger() {\n	Logger = logrus.New()\n\n	level, err := logrus.ParseLevel(viper.GetString("LOG_LEVEL"))\n	if err != nil {\n		level = logrus.InfoLevel\n	}\n	Logger.SetLevel(level)\n\n	Logger.SetFormatter(&logrus.JSONFormatter{})\n}\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Create unit test to check setting log level with table test" />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/logrus_test.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/sirupsen/logrus"\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n)\n\nfunc TestInitLogger(t *testing.T) {\n	originalLogLevel := os.Getenv("LOG_LEVEL")\n	defer os.Setenv("LOG_LEVEL", originalLogLevel)\n\n	testCases := []struct {\n		name          string\n		logLevel      string\n		expectedLevel logrus.Level\n	}{\n		{"Default Level (INFO)", "", logrus.InfoLevel},\n		{"Debug Level", "debug", logrus.DebugLevel},\n		{"Warn Level", "warn", logrus.WarnLevel},\n		{"Error Level", "error", logrus.ErrorLevel},\n		{"Invalid Level (Fallback to INFO)", "invalid", logrus.InfoLevel},\n	}\n\n	for _, tc := range testCases {\n		t.Run(tc.name, func(t *testing.T) {\n			os.Setenv("LOG_LEVEL", tc.logLevel)\n			viper.AutomaticEnv()\n			InitLogger()\n\n			assert.Equal(t, tc.expectedLevel, Logger.GetLevel())\n		})\n	}\n}\n'
+          }
+        />
+      </div>
+    </BlogSection>
+  );
+}
+
 export default function Page() {
   const [activeSectionId, setActiveSectionId] = useState('intro');
 
@@ -350,8 +398,8 @@ export default function Page() {
               name: 'Setup Config',
               children: [
                 { id: 'setup-config/viper', name: 'Viper' },
-                { id: 'setup-config/gorm', name: 'GORM' },
                 { id: 'setup-config/logrus', name: 'Logrus' },
+                { id: 'setup-config/gorm', name: 'GORM' },
                 { id: 'setup-config/swaggo', name: 'Swaggo' },
               ],
             },
@@ -370,6 +418,7 @@ export default function Page() {
 
           <ContentSetupConfig onVisible={setActiveSectionId} />
           <ContentSetupConfigViper onVisible={setActiveSectionId} />
+          <ContentSetupConfigLogrus onVisible={setActiveSectionId} />
         </div>
       </div>
     </div>
