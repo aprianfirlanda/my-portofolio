@@ -256,7 +256,7 @@ function ContentSetupConfig({ onVisible }) {
 function ContentSetupConfigViper({ onVisible }) {
   const id = 'setup-config/viper';
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0.3,
     triggerOnce: false,
   });
 
@@ -324,7 +324,7 @@ function ContentSetupConfigViper({ onVisible }) {
 function ContentSetupConfigLogrus({ onVisible }) {
   const id = 'setup-config/logrus';
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0.4,
     triggerOnce: false,
   });
 
@@ -362,6 +362,79 @@ function ContentSetupConfigLogrus({ onVisible }) {
           language="go"
           code={
             'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/sirupsen/logrus"\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n)\n\nfunc TestInitLogger(t *testing.T) {\n	originalLogLevel := os.Getenv("LOG_LEVEL")\n	defer os.Setenv("LOG_LEVEL", originalLogLevel)\n\n	testCases := []struct {\n		name          string\n		logLevel      string\n		expectedLevel logrus.Level\n	}{\n		{"Default Level (INFO)", "", logrus.InfoLevel},\n		{"Debug Level", "debug", logrus.DebugLevel},\n		{"Warn Level", "warn", logrus.WarnLevel},\n		{"Error Level", "error", logrus.ErrorLevel},\n		{"Invalid Level (Fallback to INFO)", "invalid", logrus.InfoLevel},\n	}\n\n	for _, tc := range testCases {\n		t.Run(tc.name, func(t *testing.T) {\n			os.Setenv("LOG_LEVEL", tc.logLevel)\n			viper.AutomaticEnv()\n			InitLogger()\n\n			assert.Equal(t, tc.expectedLevel, Logger.GetLevel())\n		})\n	}\n}\n'
+          }
+        />
+      </div>
+    </BlogSection>
+  );
+}
+
+function ContentSetupConfigGorm({ onVisible }) {
+  const id = 'setup-config/gorm';
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
+  return (
+    <BlogSection ref={ref} id={id}>
+      <BlogSubTitle content="# GORM" />
+      <BlogParagraph content="I use posgresql on docker for development mode." />
+      <div className="w-full">
+        <CodeBlock code={'touch docker-compose.yml'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="yml"
+          code={
+            'services:\n' +
+            '  db:\n' +
+            '    image: postgres\n' +
+            '    restart: always\n' +
+            '    environment:\n' +
+            '      POSTGRES_USER: user\n' +
+            '      POSTGRES_PASSWORD: password\n' +
+            '      POSTGRES_DB: mydatabase\n' +
+            '    ports:\n' +
+            '      - "5432:5432"\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Then you can run it with this command." />
+      <div className="w-full">
+        <CodeBlock code={'docker compose up -d'} />
+      </div>
+      <BlogParagraph content="Install dependency" />
+      <div className="w-full">
+        <CodeBlock code={'go get -u gorm.io/gorm gorm.io/driver/postgres'} />
+      </div>
+      <BlogParagraph content="Create new file internal/config/logrus.go. I use postgre database." />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/gorm.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"fmt"\n	"log"\n	"time"\n\n	"github.com/spf13/viper"\n	"gorm.io/driver/postgres"\n	"gorm.io/gorm"\n	"gorm.io/gorm/logger"\n)\n\nvar DB *gorm.DB\n\nfunc InitDB() {\n	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",\n		viper.GetString("DB_HOST"),\n		viper.GetInt("DB_PORT"),\n		viper.GetString("DB_USER"),\n		viper.GetString("DB_PASSWORD"),\n		viper.GetString("DB_NAME"),\n	)\n\n	gormConfig := &gorm.Config{\n		Logger: logger.Default.LogMode(logger.Info), // Show SQL queries\n	}\n\n	db, err := gorm.Open(postgres.Open(dsn), gormConfig)\n	if err != nil {\n		log.Fatalf("Failed to connect to database: %v", err)\n	}\n\n	sqlDB, err := db.DB()\n	if err != nil {\n		log.Fatalf("Failed to get database instance: %v", err)\n	}\n\n	sqlDB.SetMaxIdleConns(10)\n	sqlDB.SetMaxOpenConns(100)\n	sqlDB.SetConnMaxLifetime(5 * time.Minute)\n\n	DB = db\n	log.Println("Database connection established successfully!")\n}\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Create unit test to check setting log level with table test" />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/gorm_test.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n)\n\n// TestInitDB tests if the database initializes without errors\nfunc TestInitDB(t *testing.T) {\n	os.Setenv("DB_HOST", "localhost")\n	os.Setenv("DB_PORT", "5432")\n	os.Setenv("DB_USER", "user")\n	os.Setenv("DB_PASSWORD", "password")\n	os.Setenv("DB_NAME", "mydatabase")\n\n	viper.AutomaticEnv()\n	InitDB()\n\n	assert.NotNil(t, DB, "Database instance should not be nil")\n	sqlDB, err := DB.DB()\n	assert.NoError(t, err, "Should retrieve database instance without errors")\n	assert.NoError(t, sqlDB.Ping(), "Database should be reachable")\n}\n'
           }
         />
       </div>
@@ -419,6 +492,7 @@ export default function Page() {
           <ContentSetupConfig onVisible={setActiveSectionId} />
           <ContentSetupConfigViper onVisible={setActiveSectionId} />
           <ContentSetupConfigLogrus onVisible={setActiveSectionId} />
+          <ContentSetupConfigGorm onVisible={setActiveSectionId} />
         </div>
       </div>
     </div>
