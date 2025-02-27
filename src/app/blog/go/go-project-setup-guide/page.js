@@ -490,6 +490,11 @@ export default function Page() {
             { id: 'install-go', name: 'Install Go' },
             { id: 'project-initialization', name: 'Project Initialization' },
             {
+              id: 'setup-cobra-cli',
+              name: 'Setting Up Cobra CLI',
+              children: [{ id: 'setup-cobra-cli/http-fiber', name: 'HTTP (Fiber)' }],
+            },
+            {
               id: 'setup-config',
               name: 'Setup Config',
               children: [
@@ -498,11 +503,6 @@ export default function Page() {
                 { id: 'setup-config/gorm', name: 'GORM' },
                 { id: 'setup-config/swaggo', name: 'Swaggo' },
               ],
-            },
-            {
-              id: 'setup-cobra-cli',
-              name: 'Setting Up Cobra CLI',
-              children: [{ id: 'setup-cobra-cli/http', name: 'HTTP Server' }],
             },
           ]}
         />
