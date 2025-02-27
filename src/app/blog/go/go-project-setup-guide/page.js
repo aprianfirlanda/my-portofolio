@@ -462,11 +462,6 @@ export default function Page() {
             { id: 'install-go', name: 'Install Go' },
             { id: 'project-initialization', name: 'Project Initialization' },
             {
-              id: 'setup-cobra-cli',
-              name: 'Setting Up Cobra CLI',
-              children: [{ id: 'setup-cobra-cli/http', name: 'HTTP Server' }],
-            },
-            {
               id: 'setup-config',
               name: 'Setup Config',
               children: [
@@ -475,6 +470,11 @@ export default function Page() {
                 { id: 'setup-config/gorm', name: 'GORM' },
                 { id: 'setup-config/swaggo', name: 'Swaggo' },
               ],
+            },
+            {
+              id: 'setup-cobra-cli',
+              name: 'Setting Up Cobra CLI',
+              children: [{ id: 'setup-cobra-cli/http', name: 'HTTP Server' }],
             },
           ]}
         />
@@ -486,13 +486,13 @@ export default function Page() {
 
           <ContentProjectInitialization onVisible={setActiveSectionId} />
 
-          <ContentSetupCobraCli onVisible={setActiveSectionId} />
-          <ContentSetupCobraCliHTTP onVisible={setActiveSectionId} />
-
           <ContentSetupConfig onVisible={setActiveSectionId} />
           <ContentSetupConfigViper onVisible={setActiveSectionId} />
           <ContentSetupConfigLogrus onVisible={setActiveSectionId} />
           <ContentSetupConfigGorm onVisible={setActiveSectionId} />
+
+          <ContentSetupCobraCli onVisible={setActiveSectionId} />
+          <ContentSetupCobraCliHTTP onVisible={setActiveSectionId} />
         </div>
       </div>
     </div>
