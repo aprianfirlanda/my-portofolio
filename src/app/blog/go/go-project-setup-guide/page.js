@@ -442,6 +442,34 @@ function ContentSetupConfigGorm({ onVisible }) {
   );
 }
 
+function ContentSetupConfigSwaggo({ onVisible }) {
+  const id = 'setup-config/swaggo';
+  const { ref, inView } = useInView({
+    threshold: 0.3,
+    triggerOnce: false,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      onVisible(id);
+    }
+  }, [inView]);
+
+  return (
+    <BlogSection ref={ref} id={id}>
+      <BlogSubTitle content="# Swaggo" />
+      <BlogParagraph content="First, install Swag CLI." />
+      <div className="w-full">
+        <CodeBlock code={'go install github.com/swaggo/swag/cmd/swag@latest'} />
+      </div>
+      <BlogParagraph content="Then, install Swaggo dependency on the project. Because I will use GO Fiber. I use this dependency." />
+      <div className="w-full">
+        <CodeBlock code={'go get -u github.com/swaggo/fiber-swagger'} />
+      </div>
+    </BlogSection>
+  );
+}
+
 export default function Page() {
   const [activeSectionId, setActiveSectionId] = useState('intro');
 
@@ -490,6 +518,7 @@ export default function Page() {
           <ContentSetupConfigViper onVisible={setActiveSectionId} />
           <ContentSetupConfigLogrus onVisible={setActiveSectionId} />
           <ContentSetupConfigGorm onVisible={setActiveSectionId} />
+          <ContentSetupConfigSwaggo onVisible={setActiveSectionId} />
 
           <ContentSetupCobraCli onVisible={setActiveSectionId} />
           <ContentSetupCobraCliHTTP onVisible={setActiveSectionId} />
