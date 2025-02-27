@@ -412,7 +412,7 @@ function ContentSetupConfigLogrus({ onVisible }) {
 function ContentSetupConfigGorm({ onVisible }) {
   const id = 'setup-config/gorm';
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.1,
     triggerOnce: false,
   });
 
@@ -462,7 +462,7 @@ function ContentSetupConfigGorm({ onVisible }) {
         <CodeBlock
           language="go"
           code={
-            'package config\n\nimport (\n	"fmt"\n	"log"\n	"time"\n\n	"github.com/spf13/viper"\n	"gorm.io/driver/postgres"\n	"gorm.io/gorm"\n	"gorm.io/gorm/logger"\n)\n\nvar DB *gorm.DB\n\nfunc InitDB() {\n	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",\n		viper.GetString("DB_HOST"),\n		viper.GetInt("DB_PORT"),\n		viper.GetString("DB_USER"),\n		viper.GetString("DB_PASSWORD"),\n		viper.GetString("DB_NAME"),\n	)\n\n	gormConfig := &gorm.Config{\n		Logger: logger.Default.LogMode(logger.Info), // Show SQL queries\n	}\n\n	db, err := gorm.Open(postgres.Open(dsn), gormConfig)\n	if err != nil {\n		log.Fatalf("Failed to connect to database: %v", err)\n	}\n\n	sqlDB, err := db.DB()\n	if err != nil {\n		log.Fatalf("Failed to get database instance: %v", err)\n	}\n\n	sqlDB.SetMaxIdleConns(10)\n	sqlDB.SetMaxOpenConns(100)\n	sqlDB.SetConnMaxLifetime(5 * time.Minute)\n\n	DB = db\n	log.Println("Database connection established successfully!")\n}\n'
+            'package config\n\nimport (\n	"fmt"\n	"time"\n\n	"github.com/spf13/viper"\n	"gorm.io/driver/postgres"\n	"gorm.io/gorm"\n	"gorm.io/gorm/logger"\n)\n\nvar DB *gorm.DB\n\nfunc InitDB() {\n	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",\n		viper.GetString("DB_HOST"),\n		viper.GetInt("DB_PORT"),\n		viper.GetString("DB_USER"),\n		viper.GetString("DB_PASSWORD"),\n		viper.GetString("DB_NAME"),\n	)\n\n	gormConfig := &gorm.Config{\n		Logger: logger.Default.LogMode(logger.Info), // Show SQL queries\n	}\n\n	db, err := gorm.Open(postgres.Open(dsn), gormConfig)\n	if err != nil {\n		Logger.Fatal("Failed to connect to database: ", err)\n	}\n\n	sqlDB, err := db.DB()\n	if err != nil {\n		Logger.Fatal("Failed to get database instance: ", err)\n	}\n\n	sqlDB.SetMaxIdleConns(10)\n	sqlDB.SetMaxOpenConns(100)\n	sqlDB.SetConnMaxLifetime(5 * time.Minute)\n\n	DB = db\n	Logger.Info("Database connection established successfully!")\n}'
           }
         />
       </div>
@@ -475,6 +475,15 @@ function ContentSetupConfigGorm({ onVisible }) {
           language="go"
           code={
             'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n)\n\n// TestInitDB tests if the database initializes without errors\nfunc TestInitDB(t *testing.T) {\n	os.Setenv("DB_HOST", "localhost")\n	os.Setenv("DB_PORT", "5432")\n	os.Setenv("DB_USER", "user")\n	os.Setenv("DB_PASSWORD", "password")\n	os.Setenv("DB_NAME", "mydatabase")\n\n	viper.AutomaticEnv()\n	InitDB()\n\n	assert.NotNil(t, DB, "Database instance should not be nil")\n	sqlDB, err := DB.DB()\n	assert.NoError(t, err, "Should retrieve database instance without errors")\n	assert.NoError(t, sqlDB.Ping(), "Database should be reachable")\n}\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Update cmd/http.go to add initate gorm" />
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package cmd\n\nimport (\n	"github.com/gofiber/fiber/v2"\n	"github.com/spf13/cobra"\n	"github.com/spf13/viper"\n	"template-2025-feb/internal/config"\n)\n\n// httpCmd represents the command to start the Fiber HTTP server\nvar httpCmd = &cobra.Command{\n	Use:   "http",\n	Short: "Start the Fiber HTTP server",\n	Run: func(cmd *cobra.Command, args []string) {\n		config.LoadConfig(".env")\n		config.InitLogger()\n		config.InitDB()\n\n		config.Logger.Info("Starting HTTP server...")\n		startHTTPServer()\n	},\n}\n\nfunc startHTTPServer() {\n	app := fiber.New()\n\n	port := viper.GetString("HTTP_PORT")\n	if port == "" {\n		port = "9090"\n	}\n\n	config.Logger.Fatal(app.Listen(":" + port))\n}\n\nfunc init() {\n	rootCmd.AddCommand(httpCmd)\n}\n'
           }
         />
       </div>
