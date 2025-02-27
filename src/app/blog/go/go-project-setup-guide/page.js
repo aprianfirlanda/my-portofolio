@@ -278,7 +278,7 @@ function ContentSetupConfig({ onVisible }) {
 function ContentSetupConfigViper({ onVisible }) {
   const id = 'setup-config/viper';
   const { ref, inView } = useInView({
-    threshold: 0.3,
+    threshold: 0.08,
     triggerOnce: false,
   });
 
@@ -339,6 +339,15 @@ function ContentSetupConfigViper({ onVisible }) {
           }
         />
       </div>
+      <BlogParagraph content="Now, we can get http port for running from environtment variable" />
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package cmd\n\nimport (\n	"github.com/gofiber/fiber/v2"\n	"github.com/spf13/cobra"\n	"github.com/spf13/viper"\n	"log"\n	"template-2025-feb/internal/config"\n)\n\n// httpCmd represents the command to start the Fiber HTTP server\nvar httpCmd = &cobra.Command{\n	Use:   "http",\n	Short: "Start the Fiber HTTP server",\n	Run: func(cmd *cobra.Command, args []string) {\n		config.LoadConfig(".env")\n		startHTTPServer()\n	},\n}\n\nfunc startHTTPServer() {\n	app := fiber.New()\n\n	port := viper.GetString("HTTP_PORT")\n	if port == "" {\n		port = "9090"\n	}\n\n	log.Fatal(app.Listen(":" + port))\n}\n\nfunc init() {\n	rootCmd.AddCommand(httpCmd)\n}\n'
+          }
+        />
+      </div>
     </BlogSection>
   );
 }
@@ -358,7 +367,7 @@ function ContentSetupConfigLogrus({ onVisible }) {
 
   return (
     <BlogSection ref={ref} id={id}>
-      <BlogSubTitle content="# Viper" />
+      <BlogSubTitle content="# Logrus" />
       <BlogParagraph content="Install dependency" />
       <div className="w-full">
         <CodeBlock code={'go get github.com/sirupsen/logrus'} />
