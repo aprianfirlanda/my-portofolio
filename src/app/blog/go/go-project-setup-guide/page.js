@@ -454,7 +454,7 @@ function ContentSetupConfigGorm({ onVisible }) {
       <div className="w-full">
         <CodeBlock code={'go get -u gorm.io/gorm gorm.io/driver/postgres'} />
       </div>
-      <BlogParagraph content="Create new file internal/config/logrus.go. I use postgre database." />
+      <BlogParagraph content="Create new file internal/config/gorm.go. I use postgre database." />
       <div className="w-full">
         <CodeBlock code={'touch internal/config/gorm.go'} />
       </div>
