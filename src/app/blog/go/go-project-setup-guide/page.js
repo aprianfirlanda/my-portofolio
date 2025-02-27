@@ -197,6 +197,15 @@ function ContentSetupCobraCli({ onVisible }) {
           code={'go-fiber-temp/\n' + '│── cmd/\n' + '│   ├── root.go\n' + '│── main.go\n'}
         />
       </div>
+      <BlogParagraph content="Make cmd/root.go simpler" />
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package cmd\n\nimport (\n	"os"\n\n	"github.com/spf13/cobra"\n)\n\n// rootCmd represents the base command\nvar rootCmd = &cobra.Command{\n	Use:   "template-2025-feb",\n	Short: "A CLI application using Cobra",\n}\n\n// Execute runs the root command\nfunc Execute() {\n	if err := rootCmd.Execute(); err != nil {\n		os.Exit(1)\n	}\n}\n'
+          }
+        />
+      </div>
     </BlogSection>
   );
 }
@@ -204,7 +213,7 @@ function ContentSetupCobraCli({ onVisible }) {
 function ContentSetupCobraCliHTTP({ onVisible }) {
   const id = 'setup-cobra-cli/http';
   const { ref, inView } = useInView({
-    threshold: 1,
+    threshold: 0.5,
     triggerOnce: false,
   });
 
@@ -226,6 +235,19 @@ function ContentSetupCobraCliHTTP({ onVisible }) {
         <CodeBlock
           language="plaintext"
           code={'go-fiber-temp/\n' + '│── cmd/\n' + '│   ├── root.go\n' + '│   ├── http.go\n'}
+        />
+      </div>
+      <BlogParagraph content="I will use Fiber. Fiber is HTTP Web Framework that help developer build http server easily. This is command to install fiber dependency." />
+      <div className="w-full">
+        <CodeBlock code={'go get -u github.com/gofiber/fiber/v2'} />
+      </div>
+      <BlogParagraph content="Edit file cmd/http.go" />
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package cmd\n\nimport (\n	"github.com/gofiber/fiber/v2"\n	"github.com/spf13/cobra"\n	"log"\n)\n\n// httpCmd represents the command to start the Fiber HTTP server\nvar httpCmd = &cobra.Command{\n	Use:   "http",\n	Short: "Start the Fiber HTTP server",\n	Run: func(cmd *cobra.Command, args []string) {\n		startHTTPServer()\n	},\n}\n\nfunc startHTTPServer() {\n	app := fiber.New()\n\n	port := "9090"\n\n	log.Fatal(app.Listen(":" + port))\n}\n\nfunc init() {\n	rootCmd.AddCommand(httpCmd)\n}\n'
+          }
         />
       </div>
     </BlogSection>
@@ -492,7 +514,7 @@ export default function Page() {
             {
               id: 'setup-cobra-cli',
               name: 'Setting Up Cobra CLI',
-              children: [{ id: 'setup-cobra-cli/http-fiber', name: 'HTTP (Fiber)' }],
+              children: [{ id: 'setup-cobra-cli/http', name: 'HTTP' }],
             },
             {
               id: 'setup-config',
