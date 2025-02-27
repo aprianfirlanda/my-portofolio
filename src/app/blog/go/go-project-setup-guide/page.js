@@ -514,14 +514,14 @@ export default function Page() {
 
           <ContentProjectInitialization onVisible={setActiveSectionId} />
 
+          <ContentSetupCobraCli onVisible={setActiveSectionId} />
+          <ContentSetupCobraCliHTTP onVisible={setActiveSectionId} />
+
           <ContentSetupConfig onVisible={setActiveSectionId} />
           <ContentSetupConfigViper onVisible={setActiveSectionId} />
           <ContentSetupConfigLogrus onVisible={setActiveSectionId} />
           <ContentSetupConfigGorm onVisible={setActiveSectionId} />
           <ContentSetupConfigSwaggo onVisible={setActiveSectionId} />
-
-          <ContentSetupCobraCli onVisible={setActiveSectionId} />
-          <ContentSetupCobraCliHTTP onVisible={setActiveSectionId} />
         </div>
       </div>
     </div>
