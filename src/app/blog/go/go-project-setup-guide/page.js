@@ -339,7 +339,7 @@ function ContentSetupConfigViper({ onVisible }) {
           }
         />
       </div>
-      <BlogParagraph content="Now, we can get http port for running from environtment variable" />
+      <BlogParagraph content="Now, we can update cmd/http.go to get http port value from environtment variable" />
       <div className="w-full">
         <CodeBlock
           language="go"
@@ -355,7 +355,7 @@ function ContentSetupConfigViper({ onVisible }) {
 function ContentSetupConfigLogrus({ onVisible }) {
   const id = 'setup-config/logrus';
   const { ref, inView } = useInView({
-    threshold: 0.4,
+    threshold: 0.2,
     triggerOnce: false,
   });
 
@@ -393,6 +393,15 @@ function ContentSetupConfigLogrus({ onVisible }) {
           language="go"
           code={
             'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/sirupsen/logrus"\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n)\n\nfunc TestInitLogger(t *testing.T) {\n	originalLogLevel := os.Getenv("LOG_LEVEL")\n	defer os.Setenv("LOG_LEVEL", originalLogLevel)\n\n	testCases := []struct {\n		name          string\n		logLevel      string\n		expectedLevel logrus.Level\n	}{\n		{"Default Level (INFO)", "", logrus.InfoLevel},\n		{"Debug Level", "debug", logrus.DebugLevel},\n		{"Warn Level", "warn", logrus.WarnLevel},\n		{"Error Level", "error", logrus.ErrorLevel},\n		{"Invalid Level (Fallback to INFO)", "invalid", logrus.InfoLevel},\n	}\n\n	for _, tc := range testCases {\n		t.Run(tc.name, func(t *testing.T) {\n			os.Setenv("LOG_LEVEL", tc.logLevel)\n			viper.AutomaticEnv()\n			InitLogger()\n\n			assert.Equal(t, tc.expectedLevel, Logger.GetLevel())\n		})\n	}\n}\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Update cmd/http.go to add initate logger" />
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package cmd\n\nimport (\n	"github.com/gofiber/fiber/v2"\n	"github.com/spf13/cobra"\n	"github.com/spf13/viper"\n	"template-2025-feb/internal/config"\n)\n\n// httpCmd represents the command to start the Fiber HTTP server\nvar httpCmd = &cobra.Command{\n	Use:   "http",\n	Short: "Start the Fiber HTTP server",\n	Run: func(cmd *cobra.Command, args []string) {\n		config.LoadConfig(".env")\n		config.InitLogger()\n\n		config.Logger.Info("Starting HTTP server...")\n		startHTTPServer()\n	},\n}\n\nfunc startHTTPServer() {\n	app := fiber.New()\n\n	port := viper.GetString("HTTP_PORT")\n	if port == "" {\n		port = "9090"\n	}\n\n	config.Logger.Fatal(app.Listen(":" + port))\n}\n\nfunc init() {\n	rootCmd.AddCommand(httpCmd)\n}\n'
           }
         />
       </div>
