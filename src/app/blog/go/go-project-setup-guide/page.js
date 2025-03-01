@@ -128,6 +128,10 @@ function ContentProjectInitialization({ onVisible }) {
             '│  │── migrations/               # Database migration scripts\n' +
             '│── docs/                        # Swaggo API documentation\n' +
             '│── internal/                    # Internal application logic\n' +
+            '│  │── adapter/                  # Implementations of ports\n' +
+            '│  │  │── http/                  # HTTP handlers/controllers\n' +
+            '│  │  │── repository/            # Repository implementations (Gorm, etc.)\n' +
+            '│  │  │── external/              # External API implementation\n' +
             '│  │── app/                      # Application services (Use cases)\n' +
             '│  │  │── dto/                   # DTOs for HTTP request/response\n' +
             '│  │  │── serviceimpl/           # Service implementations (business logic)\n' +
@@ -137,10 +141,6 @@ function ContentProjectInitialization({ onVisible }) {
             '│  │  │── repository/            # Repository interfaces\n' +
             '│  │  │── external/              # External API interface\n' +
             '│  │  │── service/               # Service interfaces\n' +
-            '│  │── adapter/                  # Implementations of ports\n' +
-            '│  │  │── http/                  # HTTP handlers/controllers\n' +
-            '│  │  │── repository/            # Repository implementations (Gorm, etc.)\n' +
-            '│  │  │── external/              # External API implementation\n' +
             '│── main.go                      # Application entry point\n' +
             '│── go.mod                       # Go module file\n' +
             '│── go.sum                       # Go dependencies checksum'
@@ -454,6 +454,30 @@ function ContentSetupConfigGorm({ onVisible }) {
       <div className="w-full">
         <CodeBlock code={'go get -u gorm.io/gorm gorm.io/driver/postgres'} />
       </div>
+      <BlogParagraph content="Create custom logrus adapter for gorm." />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/gorm_logrus.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"context"\n	"time"\n\n	"github.com/sirupsen/logrus"\n	"gorm.io/gorm/logger"\n)\n\n// GormLogrusLogger implements Gorm\'s logger.Interface using Logrus.\ntype GormLogrusLogger struct {\n	LogLevel logger.LogLevel\n}\n\n// LogMode sets the log level dynamically.\nfunc (l *GormLogrusLogger) LogMode(level logger.LogLevel) logger.Interface {\n	newLogger := *l\n	newLogger.LogLevel = level\n	return &newLogger\n}\n\n// Info logs information-level messages.\nfunc (l *GormLogrusLogger) Info(ctx context.Context, msg string, data ...interface{}) {\n	if l.LogLevel >= logger.Info {\n		Logger.WithContext(ctx).Infof(msg, data...)\n	}\n}\n\n// Warn logs warning-level messages.\nfunc (l *GormLogrusLogger) Warn(ctx context.Context, msg string, data ...interface{}) {\n	if l.LogLevel >= logger.Warn {\n		Logger.WithContext(ctx).Warnf(msg, data...)\n	}\n}\n\n// Error logs error-level messages.\nfunc (l *GormLogrusLogger) Error(ctx context.Context, msg string, data ...interface{}) {\n	if l.LogLevel >= logger.Error {\n		Logger.WithContext(ctx).Errorf(msg, data...)\n	}\n}\n\n// Trace logs SQL queries, execution time, and errors.\nfunc (l *GormLogrusLogger) Trace(ctx context.Context, begin time.Time, fc func() (sql string, rowsAffected int64), err error) {\n	if l.LogLevel <= logger.Silent {\n		return\n	}\n\n	sql, rows := fc()\n	duration := time.Since(begin)\n\n	entry := Logger.WithContext(ctx).WithFields(logrus.Fields{\n		"sql":      sql,\n		"rows":     rows,\n		"duration": duration,\n	})\n\n	switch {\n	case err != nil && l.LogLevel >= logger.Error:\n		entry.WithError(err).Error("SQL execution error")\n	case duration > time.Millisecond*200 && l.LogLevel >= logger.Warn: // Slow queries (200ms threshold)\n		entry.Warn("Slow SQL query")\n	case l.LogLevel >= logger.Info:\n		entry.Info("SQL executed")\n	}\n}\n'
+          }
+        />
+      </div>
+      <BlogParagraph content="Create unit test logrus adapter for gorm." />
+      <div className="w-full">
+        <CodeBlock code={'touch internal/config/gorm_logrus_test.go'} />
+      </div>
+      <div className="w-full">
+        <CodeBlock
+          language="go"
+          code={
+            'package config\n\nimport (\n	"context"\n	"gorm.io/gorm/logger"\n	"testing"\n	"time"\n\n	"github.com/sirupsen/logrus"\n	"github.com/sirupsen/logrus/hooks/test"\n	"github.com/stretchr/testify/assert"\n)\n\nfunc setupLoggerTest() (*GormLogrusLogger, *test.Hook) {\n	loggerInstance := logrus.New()\n	hook := test.NewLocal(loggerInstance)\n\n	Logger = loggerInstance // Override global Logger with test logger\n	return &GormLogrusLogger{LogLevel: logger.Info}, hook\n}\n\nfunc TestGormLogrusLogger_Info(t *testing.T) {\n	gormLogger, hook := setupLoggerTest()\n	gormLogger.Info(context.Background(), "test message")\n\n	assert.NotEmpty(t, hook.Entries, "Expected log entry, but got none")\n	assert.Equal(t, "test message", hook.LastEntry().Message)\n	assert.Equal(t, logrus.InfoLevel, hook.LastEntry().Level)\n	hook.Reset()\n}\n\nfunc TestGormLogrusLogger_Warn(t *testing.T) {\n	gormLogger, hook := setupLoggerTest()\n	gormLogger.Warn(context.Background(), "test warning")\n\n	assert.NotEmpty(t, hook.Entries, "Expected log entry, but got none")\n	assert.Equal(t, "test warning", hook.LastEntry().Message)\n	assert.Equal(t, logrus.WarnLevel, hook.LastEntry().Level)\n	hook.Reset()\n}\n\nfunc TestGormLogrusLogger_Error(t *testing.T) {\n	gormLogger, hook := setupLoggerTest()\n	gormLogger.Error(context.Background(), "test error")\n\n	assert.NotEmpty(t, hook.Entries, "Expected log entry, but got none")\n	assert.Equal(t, "test error", hook.LastEntry().Message)\n	assert.Equal(t, logrus.ErrorLevel, hook.LastEntry().Level)\n	hook.Reset()\n}\n\nfunc TestGormLogrusLogger_Trace(t *testing.T) {\n	gormLogger, hook := setupLoggerTest()\n\n	startTime := time.Now()\n	gormLogger.Trace(context.Background(), startTime, func() (string, int64) {\n		return "SELECT * FROM users", 1\n	}, nil)\n\n	assert.NotEmpty(t, hook.Entries, "Expected log entry, but got none")\n	assert.Contains(t, hook.LastEntry().Data, "sql")\n	assert.Equal(t, "SQL executed", hook.LastEntry().Message)\n}\n'
+          }
+        />
+      </div>
       <BlogParagraph content="Create new file internal/config/gorm.go. I use postgre database." />
       <div className="w-full">
         <CodeBlock code={'touch internal/config/gorm.go'} />
@@ -462,7 +486,7 @@ function ContentSetupConfigGorm({ onVisible }) {
         <CodeBlock
           language="go"
           code={
-            'package config\n\nimport (\n	"fmt"\n	"time"\n\n	"github.com/spf13/viper"\n	"gorm.io/driver/postgres"\n	"gorm.io/gorm"\n	"gorm.io/gorm/logger"\n)\n\nvar DB *gorm.DB\n\nfunc InitDB() {\n	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",\n		viper.GetString("DB_HOST"),\n		viper.GetInt("DB_PORT"),\n		viper.GetString("DB_USER"),\n		viper.GetString("DB_PASSWORD"),\n		viper.GetString("DB_NAME"),\n	)\n\n	gormConfig := &gorm.Config{\n		Logger: logger.Default.LogMode(logger.Info), // Show SQL queries\n	}\n\n	db, err := gorm.Open(postgres.Open(dsn), gormConfig)\n	if err != nil {\n		Logger.Fatal("Failed to connect to database: ", err)\n	}\n\n	sqlDB, err := db.DB()\n	if err != nil {\n		Logger.Fatal("Failed to get database instance: ", err)\n	}\n\n	sqlDB.SetMaxIdleConns(10)\n	sqlDB.SetMaxOpenConns(100)\n	sqlDB.SetConnMaxLifetime(5 * time.Minute)\n\n	DB = db\n	Logger.Info("Database connection established successfully!")\n}'
+            'package config\n\nimport (\n	"fmt"\n	"time"\n\n	"github.com/spf13/viper"\n	"gorm.io/driver/postgres"\n	"gorm.io/gorm"\n	"gorm.io/gorm/logger"\n)\n\nvar DB *gorm.DB\n\nfunc InitDB() {\n	var gormLogLevel logger.LogLevel\n	switch viper.GetString("LOG_LEVEL") {\n	case "debug":\n		gormLogLevel = logger.Info\n	case "warn":\n		gormLogLevel = logger.Warn\n	case "error":\n		gormLogLevel = logger.Error\n	default:\n		gormLogLevel = logger.Silent\n	}\n\n	dsn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",\n		viper.GetString("DB_HOST"),\n		viper.GetInt("DB_PORT"),\n		viper.GetString("DB_USER"),\n		viper.GetString("DB_PASSWORD"),\n		viper.GetString("DB_NAME"),\n	)\n\n	gormConfig := &gorm.Config{\n		Logger: &GormLogrusLogger{LogLevel: gormLogLevel},\n	}\n\n	db, err := gorm.Open(postgres.Open(dsn), gormConfig)\n	if err != nil {\n		Logger.Fatal("Failed to connect to database: ", err)\n	}\n\n	sqlDB, err := db.DB()\n	if err != nil {\n		Logger.Fatal("Failed to get database instance: ", err)\n	}\n\n	sqlDB.SetMaxIdleConns(10)\n	sqlDB.SetMaxOpenConns(100)\n	sqlDB.SetConnMaxLifetime(5 * time.Minute)\n\n	DB = db\n	Logger.Info("Database connection established successfully!")\n}\n'
           }
         />
       </div>
@@ -474,7 +498,7 @@ function ContentSetupConfigGorm({ onVisible }) {
         <CodeBlock
           language="go"
           code={
-            'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n)\n\n// TestInitDB tests if the database initializes without errors\nfunc TestInitDB(t *testing.T) {\n	os.Setenv("DB_HOST", "localhost")\n	os.Setenv("DB_PORT", "5432")\n	os.Setenv("DB_USER", "user")\n	os.Setenv("DB_PASSWORD", "password")\n	os.Setenv("DB_NAME", "mydatabase")\n\n	viper.AutomaticEnv()\n	InitDB()\n\n	assert.NotNil(t, DB, "Database instance should not be nil")\n	sqlDB, err := DB.DB()\n	assert.NoError(t, err, "Should retrieve database instance without errors")\n	assert.NoError(t, sqlDB.Ping(), "Database should be reachable")\n}\n'
+            'package config\n\nimport (\n	"os"\n	"testing"\n\n	"github.com/spf13/viper"\n	"github.com/stretchr/testify/assert"\n)\n\n// TestInitDB tests if the database initializes without errors\nfunc TestInitDB(t *testing.T) {\n	os.Setenv("DB_HOST", "localhost")\n	os.Setenv("DB_PORT", "5432")\n	os.Setenv("DB_USER", "user")\n	os.Setenv("DB_PASSWORD", "password")\n	os.Setenv("DB_NAME", "mydatabase")\n	os.Setenv("LOG_INFO", "info")\n\n	viper.AutomaticEnv()\n	InitLogger()\n	InitDB()\n\n	assert.NotNil(t, DB, "Database instance should not be nil")\n	sqlDB, err := DB.DB()\n	assert.NoError(t, err, "Should retrieve database instance without errors")\n	assert.NoError(t, sqlDB.Ping(), "Database should be reachable")\n}\n'
           }
         />
       </div>
