@@ -5,6 +5,10 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 const localizer = momentLocalizer(moment);
 
 export default function FinanceCalendar({ events }) {
+  const handleViewChange = (newView) => {
+    console.log(newView);
+  };
+
   const handleSelectSlot = (start) => {
     console.log(start);
   };
@@ -20,8 +24,9 @@ export default function FinanceCalendar({ events }) {
         startAccessor="start"
         endAccessor="end"
         selectable
-        onSelectSlot={handleSelectSlot} // Click on empty slot
-        onSelectEvent={handleSelectEvent} // Click on existing event
+        onSelectSlot={handleSelectSlot}
+        onSelectEvent={handleSelectEvent}
+        onView={handleViewChange}
       />
     </div>
   );
