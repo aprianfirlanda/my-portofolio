@@ -1,5 +1,4 @@
-node_modules
-.next
-out
-public
 dist
+build
+coverage
+node_modules
